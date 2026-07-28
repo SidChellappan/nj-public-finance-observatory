@@ -1,0 +1,5 @@
+* text=auto eol=lf
+*.xlsm binary
+*.png binary
+*.zip binary
+*.svg -whitespace

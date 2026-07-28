@@ -1,0 +1,119 @@
+name: Data correction
+description: Report a specific, source-backed correction to a published record or its provenance.
+title: "[Data correction]: "
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping improve the record. Please submit one municipality-year-field correction per issue when practical.
+
+        GitHub issues and attachments are public. Do not include confidential, private, or personally identifying information. A correction request documents evidence for review; it does not automatically replace the source-reported value.
+
+  - type: dropdown
+    id: municipality_code
+    attributes:
+      label: Municipality code
+      description: Select the stable municipality identifier used by the Observatory.
+      options:
+        - "1103 — Hamilton"
+        - "1107 — Lawrence"
+        - "1111 — Trenton"
+        - "1113 — West Windsor"
+        - "1114 — Princeton"
+        - "Multiple municipalities — explain below"
+    validations:
+      required: true
+
+  - type: input
+    id: budget_year
+    attributes:
+      label: Budget year
+      description: Enter a year from 2015 through 2025. For multiple years, list each one.
+      placeholder: "2024"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: field_name
+    attributes:
+      label: Field
+      description: Select the field whose value, missingness, or provenance needs review.
+      options:
+        - Population estimate
+        - Net debt
+        - Per-capita net debt
+        - Tax-collection percentage
+        - No UFB available
+        - Significant data missing
+        - Total structural imbalances
+        - Three-year average property valuation
+        - Net debt as a percentage of valuation
+        - Source or provenance metadata
+        - Other — explain below
+    validations:
+      required: true
+
+  - type: input
+    id: source_sheet
+    attributes:
+      label: Source sheet
+      description: Enter the annual NJ DCA workbook sheet or other public source location.
+      placeholder: "2024 Summary"
+    validations:
+      required: true
+
+  - type: input
+    id: source_cell
+    attributes:
+      label: Source cell
+      description: Enter the Excel cell address when the evidence comes from the NJ DCA workbook; otherwise enter "N/A — see supporting evidence."
+      placeholder: "LU297"
+    validations:
+      required: true
+
+  - type: textarea
+    id: current_record
+    attributes:
+      label: Current Observatory record
+      description: Quote the current value, null, flag, source reference, or explanatory text that should be reviewed.
+      placeholder: Describe what the processed CSV, chart, table, methods page, or anomaly ledger currently shows.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed_correction
+    attributes:
+      label: Proposed correction
+      description: State the exact replacement or documentation change and explain why it is warranted.
+      placeholder: Describe the proposed value or wording without overwriting uncertainty.
+    validations:
+      required: true
+
+  - type: textarea
+    id: supporting_evidence
+    attributes:
+      label: Supporting public evidence
+      description: Provide direct public links, precise document citations, or public attachments that another reviewer can inspect.
+      placeholder: Include the publisher, document title, date, page or table, and URL when available.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction_notes
+    attributes:
+      label: Reproduction notes
+      description: Optional steps that help another reviewer repeat the comparison.
+      placeholder: Explain any calculation, unit conversion, or workbook navigation needed to reproduce the finding.
+
+  - type: checkboxes
+    id: confirmations
+    attributes:
+      label: Confirmations
+      options:
+        - label: I identified the municipality code, year, field, source location, proposed correction, and supporting evidence.
+          required: true
+        - label: I checked that missing text such as “No data” was not treated as numeric zero.
+          required: true
+        - label: I understand that this issue and its attachments will be public and contain no confidential or personally identifying information.
+          required: true

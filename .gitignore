@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+.venv/
+dist/
+build/
+*.egg-info/
+tmp/
+
+# Preserve the downloaded NJ DCA workbook locally, but do not redistribute the
+# 22.6 MB upstream binary through this repository. The manifest, checksum, and
+# verified downloader remain versioned.
+data/raw/*.xlsm

@@ -1,0 +1,6 @@
+municipality_code,municipality_name,net_debt_budget_year,net_debt,net_debt_unit,net_debt_source_sheet,net_debt_source_cell,tax_collection_budget_year,tax_collection_reference_year,tax_collection_pct,tax_collection_unit,tax_collection_source_sheet,tax_collection_source_cell
+1103,Hamilton,2025,149632196.48,"current dollars, as reported",2025 Summary,LT291,2025,2024,99.991742,percentage points,2025 Summary,P291
+1107,Lawrence,2025,8030562.26,"current dollars, as reported",2025 Summary,LT295,2025,2024,99.491895,percentage points,2025 Summary,P295
+1111,Trenton,2024,85279228.7,"current dollars, as reported",2024 Summary,LU297,2024,2023,98.282745,percentage points,2024 Summary,P297
+1113,West Windsor,2025,66644874.95,"current dollars, as reported",2025 Summary,LT299,2025,2024,99.489654,percentage points,2025 Summary,P299
+1114,Princeton,2025,204951186.77,"current dollars, as reported",2025 Summary,LT300,2025,2024,99.127945,percentage points,2025 Summary,P300

@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nj-public-finance-observatory"
+version = "0.1.0"
+description = "A reproducible, methods-first view of selected Mercer County municipal finance records."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "matplotlib==3.11.1",
+  "openpyxl==3.1.5",
+  "pandas==3.0.5",
+]
+
+[project.optional-dependencies]
+dev = ["pytest==9.1.1"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+njpfo = ["templates/*.html", "templates/*.css"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
