@@ -52,15 +52,19 @@
         <p class="section-kicker">Read this first</p>
         <h2>What the data can and cannot show</h2>
       </div>
-      <div class="limit-grid">
-        <article class="callout can">
-          <h3>It can show</h3>
-          <p>What the state workbook reports for these five municipality codes, how reported values move over time, and where the source is missing, flagged, or internally inconsistent.</p>
-        </article>
-        <article class="callout cannot">
-          <h3>It cannot show</h3>
-          <p>Financial health, management quality, causation, creditworthiness, or what policy a community should adopt. The records are self-reported and are not independently verified here.</p>
-        </article>
+      <div class="limit-explainer">
+        <p>The User-Friendly Budget (UFB) is New Jersey's municipal budget reporting form and database distributed by the Department of Community Affairs. Availability and completeness vary by municipality and budget year. “No UFB Available” means NJ DCA indicates that no UFB is on file; “Significant Data Missing” means a submitted UFB left at least one entire section blank.</p>
+        <p><strong>Reported net debt</strong> is the NJ DCA source measure of gross debt less the deductions recognized in that source for the budget year. <strong>Tax collection</strong> is the reported percentage of the prior calendar year's levy collected; the table therefore shows both the tax reference year and the associated budget year.</p>
+        <div class="limit-grid">
+          <article class="callout can">
+            <h3>It can show</h3>
+            <p>What the state workbook reports for these five municipality codes, how each municipality's reported values move over time, and where the source is missing, flagged, or internally inconsistent.</p>
+          </article>
+          <article class="callout cannot">
+            <h3>It cannot show</h3>
+            <p><strong>Reported net debt is a statutory, source-defined measure.</strong> It is not a complete measure of a local unit's total debt-like obligations, fiscal condition, or credit quality. Obligations not captured by this field may exist; evaluating them would require separately reviewed ACFR disclosures and legal and financial analysis, which v0.1 does not perform.</p>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -70,19 +74,20 @@
           <p class="section-kicker">Principal observation</p>
           <h2>Reported net debt over time</h2>
         </div>
-        <p class="section-note">Current dollars, not adjusted for inflation</p>
+        <p class="section-note">Nominal dollars as reported for each budget year; not adjusted for inflation or converted to a common-year dollar basis.</p>
       </div>
       <p class="chart-scroll-hint">Swipe the chart sideways to view all years <span aria-hidden="true">→</span></p>
       <figure class="chart-frame">
         <img
           src="assets/net_debt_trend.svg"
-          alt="Line chart of reported net debt from 2015 through 2025 for Hamilton, Lawrence, Trenton, West Windsor, and Princeton. Gaps mark missing, source-flagged, or unreconciled observations; lines do not bridge those gaps."
+          alt="Line chart of reported net debt in nominal dollars from 2015 through 2025 for Hamilton, Lawrence, Trenton, West Windsor, and Princeton. Read each series within municipality over time; differences in line height are not measures of relative debt burden or fiscal strength. Gaps mark missing, source-flagged, or unreconciled observations, and lines do not bridge those gaps."
           width="1140"
           height="640">
         <figcaption>
           Reported municipal net debt by budget year. A gap means a record was unavailable, carried an NJ DCA missing-data flag, or remained unreconciled; it does not mean zero debt. Princeton's reported 2022 zero is retained in the download but excluded from this chart pending clarification. Source: NJ DCA 2025 User-Friendly Budget Database, annual Summary sheets.
         </figcaption>
       </figure>
+      <p class="chart-guardrail"><strong>Interpretation guardrail.</strong> Read each series as a within-municipality record over time. Differences in line height between municipalities are not measures of relative debt burden, fiscal strength, or a better or worse fiscal position.</p>
     </section>
 
     <section class="section" aria-labelledby="latest-title">
@@ -109,6 +114,7 @@
           </tbody>
         </table>
       </div>
+      <p class="table-note"><strong>Dollar basis.</strong> Nominal dollars as reported for each budget year; not adjusted for inflation or converted to a common-year dollar basis.</p>
       <p class="table-note">“Latest valid” is field-specific. It does not certify the value as independently audited; it means the source value is numeric, the row does not carry either source missing-data flag, and the observation is not excluded by a documented v0.1 rule.</p>
     </section>
 
@@ -130,8 +136,8 @@
         <article>
           <span class="issue-number">02</span>
           <div>
-            <h3>2024 valuation scale problem</h3>
-            <p>All five 2024 property-valuation values are sharply below both adjacent years. A formula-mode test verifies that the source cells use cached external-workbook lookups. The values remain in the audit download, but valuation-derived debt ratios are excluded from charts, summary tables, and interpretive claims.</p>
+            <h3>Unreconciled 2024 valuation source-scale anomaly</h3>
+            <p>All five 2024 three-year property-valuation values are sharply below adjacent years and rely on cached external-workbook lookups. The cause has not been established. The raw values remain available only for audit; the values and valuation-derived ratios are excluded from charts, summary tables, and interpretive claims.</p>
           </div>
         </article>
         <article>
@@ -145,7 +151,7 @@
           <span class="issue-number">04</span>
           <div>
             <h3>Source quality flags</h3>
-            <p>{{SOURCE_FLAG_COUNT}} rows carry “No UFB Available” or “Significant Data Missing.” {{MISSING_DEBT_COUNT}} rows report no numeric net debt. Flagged rows stay in the panel but cannot supply chart or latest-valid values.</p>
+            <p>{{SOURCE_FLAG_COUNT}} rows carry “No UFB Available,” meaning NJ DCA indicates no UFB is on file, or “Significant Data Missing,” meaning a submitted UFB left at least one entire section blank. {{MISSING_DEBT_COUNT}} rows report no numeric net debt. Flagged rows stay in the panel but cannot supply chart or latest-valid values.</p>
           </div>
         </article>
       </div>
@@ -162,6 +168,7 @@
       <aside class="source-card">
         <p class="source-card-label">Primary source</p>
         <h3>NJ DCA 2025 User-Friendly Budget Database</h3>
+        <p>New Jersey's municipal budget reporting form and database, with availability and completeness that vary by municipality and budget year.</p>
         <p>{{SOURCE_WORKBOOK_NAME}}</p>
         <a href="{{SOURCE_PAGE_URL}}">Open the state source page</a>
         <a href="{{SOURCE_WORKBOOK_URL}}">Open the state workbook</a>

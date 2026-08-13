@@ -34,6 +34,10 @@ from .validate import (
 )
 
 TEMPLATE_DIRECTORY = Path(__file__).with_name("templates")
+NOMINAL_DOLLAR_SENTENCE = (
+    "Nominal dollars as reported for each budget year; not adjusted for "
+    "inflation or converted to a common-year dollar basis."
+)
 
 REPRODUCIBLE_ARTIFACTS = (
     "data/processed/mercer_fiscal_panel.csv",
@@ -79,7 +83,7 @@ def build_latest_valid_table(panel: pd.DataFrame) -> pd.DataFrame:
                 "municipality_name": name,
                 "net_debt_budget_year": int(debt["budget_year"]),
                 "net_debt": float(debt["net_debt"]),
-                "net_debt_unit": "current dollars, as reported",
+                "net_debt_unit": NOMINAL_DOLLAR_SENTENCE,
                 "net_debt_source_sheet": debt["source_sheet"],
                 "net_debt_source_cell": debt["net_debt_source_cell"],
                 "tax_collection_budget_year": int(tax["budget_year"]),
@@ -142,28 +146,31 @@ def build_data_dictionary() -> pd.DataFrame:
             "Never missing when the workbook contract passes.",
         ),
         "net_debt": (
-            "Gross debt less deductions, as reported by NJ DCA.",
-            "current dollars",
+            "Statutory, source-defined NJ DCA measure of gross debt less the "
+            "deductions recognized in that source; not a complete measure of "
+            "total debt-like obligations, fiscal condition, or credit quality.",
+            "nominal dollars as reported",
             "Net Debt",
-            "Convert numeric source value and round to cents; no inflation adjustment.",
+            "Convert numeric source value and round to cents. "
+            + NOMINAL_DOLLAR_SENTENCE,
             "'No data' becomes null; reported numeric zero stays zero.",
         ),
         "per_capita_net_debt": (
             "Per-capita net debt distributed in the source workbook.",
-            "current dollars per person",
+            "nominal dollars per person as reported",
             "Per Capita Net Debt",
             "Retain the reported numeric value; do not replace mismatches.",
             "'No data' becomes null.",
         ),
         "calculated_per_capita_net_debt": (
             "Audit comparison: reported net debt divided by reported population.",
-            "current dollars per person",
+            "nominal dollars per person",
             "Derived from net_debt and population_estimate",
             "net_debt / population_estimate when both are available.",
             "Null when either input is unavailable or population is not positive.",
         ),
         "tax_collection_pct": (
-            "Previous calendar year's tax levy that was collected.",
+            "Reported percentage of the prior calendar year's tax levy collected.",
             "percentage points",
             "% of Taxes Collected, CY [year]",
             "Multiply the source fraction by 100.",
@@ -199,14 +206,14 @@ def build_data_dictionary() -> pd.DataFrame:
         ),
         "total_structural_imbalances": (
             "Total of source-identified structural imbalances including offsets.",
-            "current dollars",
+            "nominal dollars as reported",
             "Total Imbalances",
             "Convert numeric source value and round to cents.",
             "'No data' becomes null; retained as audit-only in v0.1.",
         ),
         "three_year_average_property_valuation": (
             "Three-year average total property valuation distributed by NJ DCA.",
-            "current dollars",
+            "nominal dollars as reported",
             "3 Yr. Average Property Valuation",
             "Convert numeric cached source value; make no scale repair.",
             "'No data' becomes null; 2024 target values are audit-only.",
@@ -334,7 +341,7 @@ def _latest_table_html(latest: pd.DataFrame) -> str:
               </th>
               <td data-label="Reported net debt">
                 <span class="metric-value">{_format_currency(record.net_debt)}</span>
-                <span class="metric-meta">Budget year {record.net_debt_budget_year}; current dollars</span>
+                <span class="metric-meta">Budget year {record.net_debt_budget_year}; nominal dollars as reported</span>
               </td>
               <td data-label="Taxes collected">
                 <span class="metric-value">{record.tax_collection_pct:.2f}%</span>

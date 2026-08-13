@@ -26,7 +26,7 @@ the `v0.1.0` tag merely because the automated tests pass.
 - [ ] Have someone familiar with municipal budgets review the metric
       definitions and conservative source-flag policy.
 - [ ] Have a nontechnical reader test the page and uncertainty language.
-- [ ] Approve one restrained descriptive finding stated in current dollars.
+- [ ] Approve one restrained descriptive finding stated in nominal dollars and interpreted within municipality.
 
 ## 3. Clean-checkout rehearsal
 

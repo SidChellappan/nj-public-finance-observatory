@@ -54,6 +54,7 @@
         <section id="source">
           <p class="section-kicker">02 · Source provenance</p>
           <h2>A pinned state workbook, not hand-copied values</h2>
+          <p>The User-Friendly Budget (UFB) is New Jersey's municipal budget reporting form and database distributed by the Department of Community Affairs. Availability and completeness vary by municipality and budget year. “No UFB Available” means NJ DCA indicates that no UFB is on file; “Significant Data Missing” means a submitted UFB left at least one entire section blank.</p>
           <dl class="provenance-list">
             <div><dt>Publisher</dt><dd>New Jersey Department of Community Affairs, Division of Local Government Services</dd></div>
             <div><dt>Workbook</dt><dd>UFB Database - FINAL.xlsm</dd></div>
@@ -63,7 +64,7 @@
             <div><dt>SHA-256</dt><dd><code>79a59be4c4ab2669d60ebb8072aab5a5775df7025e66cb95a887e1c39ed8ccaa</code></dd></div>
           </dl>
           <p>The build verifies this checksum before extraction. If the state replaces the file at the same URL, the build stops until the changed workbook is reviewed and provenance is deliberately updated.</p>
-          <p>The workbook is opened with <code>openpyxl</code> in read-only, <code>data_only=True</code> mode. That reads values distributed in the workbook without executing macros or recalculating external links. It also means cached source values can carry upstream problems; the 2024 valuation anomaly is one example.</p>
+          <p>The workbook is opened with <code>openpyxl</code> in read-only, <code>data_only=True</code> mode. That reads values distributed in the workbook without executing macros or recalculating external links. It also means cached source values can carry upstream problems; the unreconciled 2024 valuation source-scale anomaly is one example, and its cause has not been established.</p>
         </section>
 
         <section id="fields">
@@ -80,7 +81,7 @@
                 <tr><th scope="row">No UFB / Significant missing</th><td>F / G</td><td>F / G</td><td>Boolean quality flags</td></tr>
                 <tr><th scope="row">Population</th><td>I</td><td>I</td><td>Reported annual population value and full header label</td></tr>
                 <tr><th scope="row">Taxes collected</th><td>P</td><td>P</td><td>Source fraction × 100; CY parsed from header</td></tr>
-                <tr><th scope="row">Net debt</th><td>LU</td><td>LT</td><td>Primary reported measure, current dollars</td></tr>
+                <tr><th scope="row">Net debt</th><td>LU</td><td>LT</td><td>Gross debt less source-recognized deductions; nominal dollars</td></tr>
                 <tr><th scope="row">Per-capita net debt</th><td>LV</td><td>LU</td><td>Reported audit field; not replaced by a calculation</td></tr>
                 <tr><th scope="row">Three-year valuation</th><td>LW</td><td>LV</td><td>Audit-only because 2024 is unreconciled</td></tr>
                 <tr><th scope="row">Debt / valuation</th><td>LX</td><td>LW</td><td>Audit-only; not graphed</td></tr>
@@ -88,7 +89,7 @@
               </tbody>
             </table>
           </div>
-          <p>The source glossary defines net debt as gross debt less deductions; per-capita net debt as net debt divided by municipal Census population; taxes collected as the share of the prior calendar year's levy actually collected; and total imbalances as the total of identified structural imbalances including offsets.</p>
+          <p>Reported net debt is the NJ DCA source measure of gross debt less the deductions recognized in that source for the budget year. Tax collection is the reported percentage of the prior calendar year's levy collected; the latest-valid table therefore shows both the tax reference year and the associated budget year. The source glossary defines per-capita net debt as net debt divided by municipal Census population and total imbalances as the total of identified structural imbalances including offsets.</p>
         </section>
 
         <section id="normalization">
@@ -137,20 +138,23 @@
         <section id="publication">
           <p class="section-kicker">06 · Publication rules</p>
           <h2>Reported values are not the same as verified facts</h2>
-          <p>The chart displays the workbook's reported net debt in current dollars. It does not adjust for inflation, derive a debt ratio, or claim that a change is good or bad. Missing, source-flagged, and unreconciled observations become visible gaps; lines are not interpolated across them.</p>
+          <p>The chart displays the workbook's reported net debt. Nominal dollars as reported for each budget year; not adjusted for inflation or converted to a common-year dollar basis. Missing, source-flagged, and unreconciled observations become visible gaps; lines are not interpolated across them.</p>
+          <p>Read each series as a within-municipality record over time. Differences in line height between municipalities are not measures of relative debt burden, fiscal strength, or a better or worse fiscal position.</p>
           <p>The latest-valid table chooses the newest value separately for net debt and tax collection. A candidate must be numeric, carry neither missing-data flag, and pass the field's publication rule. Each displayed cell includes its budget year, unit, annual source sheet, and Excel cell.</p>
-          <p>The 2024 property-valuation cells for all five targets use cached external-workbook <code>VLOOKUP</code> values that are far below 2023 and 2025. Those values and the source debt-to-valuation ratios remain in the downloadable audit panel but are excluded from charts, latest-valid tables, and interpretive claims. Reported net debt does not depend on that denominator and remains eligible when its own row passes the rules.</p>
+          <p>The 2024 property-valuation cells for all five targets use cached external-workbook <code>VLOOKUP</code> values that are far below 2023 and 2025. The cause has not been established. Those values and the source debt-to-valuation ratios remain in the downloadable audit panel but are excluded from charts, latest-valid tables, and interpretive claims. Reported net debt does not depend on that denominator and remains eligible when its own row passes the rules.</p>
         </section>
 
         <section id="limitations">
           <p class="section-kicker">07 · Known limitations</p>
           <h2>What remains unresolved</h2>
           <ul>
+            <li>Reported net debt is a statutory, source-defined measure. It is not a complete measure of a local unit's total debt-like obligations, fiscal condition, or credit quality. Obligations not captured by this field may exist; evaluating them would require separately reviewed ACFR disclosures and legal and financial analysis, which v0.1 does not perform.</li>
             <li>Trenton's 2025 net-debt, per-capita debt, and tax-collection cells say “No data.” Earlier Trenton years also contain unavailable records.</li>
             <li>Princeton's 2022 source row reports numeric zero for every net-debt component while adjacent years exceed $90 million. Zero is retained, but the chart omits it pending clarification.</li>
             <li>Several per-capita debt values do not approximately equal the same row's reported debt divided by population. They remain in the audit download but are excluded from charts, summary tables, and interpretive claims.</li>
+            <li>The unreconciled 2024 valuation source-scale anomaly affects all five targets. Its raw values remain available only for audit, and its cause has not been established.</li>
             <li>The project does not independently audit municipal submissions or establish why a value changed.</li>
-            <li>Current dollars are not adjusted for inflation, and definitions or source construction may change over time.</li>
+            <li>Nominal dollars as reported for each budget year; not adjusted for inflation or converted to a common-year dollar basis. Definitions or source construction may change over time.</li>
           </ul>
           <p>ACS enrichment is excluded because rolling five-year estimates would add overlapping periods and a second set of vintage and uncertainty rules before the base data is stable. EMMA is excluded because issuer matching, disclosure-document extraction, and bond-trading context are separate research problems. Neither source is needed to answer the narrow v0.1 question.</p>
         </section>

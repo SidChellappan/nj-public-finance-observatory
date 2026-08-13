@@ -80,14 +80,15 @@ def build_chart(panel: pd.DataFrame, destination: Path) -> None:
         )
 
     axis.set_title(
-        "Reported municipal net debt, 2015-2025",
+        "Reported municipal net debt, 2015-2025\n"
+        "Nominal dollars · read each series within municipality",
         loc="left",
-        fontsize=17,
+        fontsize=16,
         color="#172554",
         pad=16,
     )
     axis.set_xlabel("Budget year", labelpad=10)
-    axis.set_ylabel("Reported net debt (millions of dollars)", labelpad=12)
+    axis.set_ylabel("Reported net debt (nominal dollars, millions)", labelpad=12)
     axis.set_xticks(TARGET_YEARS)
     axis.tick_params(axis="x", rotation=45)
     axis.yaxis.set_major_locator(MultipleLocator(25))
@@ -110,11 +111,17 @@ def build_chart(panel: pd.DataFrame, destination: Path) -> None:
         format="svg",
         facecolor=figure.get_facecolor(),
         metadata={
-            "Title": "Reported municipal net debt, 2015-2025",
+            "Title": (
+                "Reported municipal net debt, 2015-2025 — nominal dollars"
+            ),
             "Description": (
                 "Line chart for Hamilton, Lawrence, Trenton, West Windsor, "
-                "and Princeton. Missing, source-flagged, and unreconciled "
-                "observations appear as gaps."
+                "and Princeton. Nominal dollars as reported for each budget "
+                "year; not adjusted for inflation or converted to a common-year "
+                "dollar basis. Read each series as a within-municipality record "
+                "over time. Differences in line height are not measures of "
+                "relative debt burden or fiscal strength. Missing, source-flagged, "
+                "and unreconciled observations appear as gaps."
             ),
             "Creator": "NJ Public Finance Observatory v0.1",
             "Date": None,
@@ -125,12 +132,16 @@ def build_chart(panel: pd.DataFrame, destination: Path) -> None:
     text = destination.read_text(encoding="utf-8")
     title = (
         "<title id=\"chart-title\">Reported municipal net debt, "
-        "2015-2025</title>"
+        "2015-2025 — nominal dollars</title>"
     )
     description = (
-        "<desc id=\"chart-desc\">Five municipal series. Missing, "
-        "source-flagged, and unreconciled observations are shown as visible "
-        "gaps; no values are interpolated.</desc>"
+        "<desc id=\"chart-desc\">Five municipal series. Nominal dollars as "
+        "reported for each budget year; not adjusted for inflation or converted "
+        "to a common-year dollar basis. Read each series as a within-municipality "
+        "record over time. Differences in line height between municipalities are "
+        "not measures of relative debt burden, fiscal strength, or a better or "
+        "worse fiscal position. Missing, source-flagged, and unreconciled "
+        "observations are shown as visible gaps; no values are interpolated.</desc>"
     )
     text = re.sub(
         r"(<svg\b[^>]*>)",

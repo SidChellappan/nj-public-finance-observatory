@@ -62,6 +62,8 @@ The tests cover duplicate keys, missing codes and rows, the 55-row contract, inv
 
 ## Primary source and provenance
 
+The User-Friendly Budget (UFB) is New Jersey's municipal budget reporting form and database distributed by the Department of Community Affairs. Availability and completeness vary by municipality and budget year. `No UFB Available` means NJ DCA indicates that no UFB is on file; `Significant Data Missing` means a submitted UFB left at least one entire section blank.
+
 - Publisher: New Jersey Department of Community Affairs, Division of Local Government Services
 - Source page: <https://www.nj.gov/dca/dlgs/programs/mc_budgets.shtml>
 - Workbook: `UFB Database - FINAL.xlsm`
@@ -84,13 +86,15 @@ Every annual sheet uses header row 5. The target rows are found from the municip
 | Significant Data Missing | G | G | Source flag |
 | Population | I | I | Annual header label preserved |
 | Taxes collected | P | P | Source fraction multiplied by 100 |
-| Net debt | LU | LT | Reported current dollars; primary measure |
-| Per-capita net debt | LV | LU | Reported audit field |
-| Three-year property valuation | LW | LV | Audit-only in v0.1 |
+| Net debt | LU | LT | Reported nominal dollars; primary measure |
+| Per-capita net debt | LV | LU | Reported nominal dollars per person; audit field |
+| Three-year property valuation | LW | LV | Reported nominal dollars; audit-only in v0.1 |
 | Debt as percent of valuation | LX | LW | Included in the audit download; excluded from charts, summary tables, and interpretive claims |
-| Total structural imbalances | OQ | OP | Included audit-only after definition and coverage review |
+| Total structural imbalances | OQ | OP | Reported nominal dollars; included audit-only after definition and coverage review |
 
-The tax-collection field refers to the previous calendar year. The processed panel therefore stores both the budget year and the tax reference year.
+Reported net debt is the NJ DCA source measure of gross debt less the deductions recognized in that source for the budget year. Tax collection is the reported percentage of the prior calendar year's levy collected. The processed panel therefore stores both the tax reference year and the associated budget year.
+
+Nominal dollars as reported for each budget year; not adjusted for inflation or converted to a common-year dollar basis.
 
 ## Field and missing-data rules
 
@@ -110,7 +114,7 @@ See `data/data_dictionary.csv` and `docs/methods.html` for field-level definitio
 ## Confirmed source-data problems
 
 1. **Trenton missing debt.** Trenton's 2025 debt fields say `"No data"`. Trenton also has earlier missing or unavailable debt observations. They remain null and appear as chart gaps.
-2. **2024 valuation scale anomaly.** Each target's 2024 three-year property valuation is far below both adjacent years. A formula-mode regression test verifies that those five cells are external-workbook `VLOOKUP` references, and the distributed cached values remain unreconciled. The values remain in the audit download, but debt-to-valuation ratios are excluded from charts, summary tables, and interpretive claims.
+2. **Unreconciled 2024 valuation source-scale anomaly.** Each target's 2024 three-year property valuation is far below both adjacent years. A formula-mode regression test verifies that those five cells are external-workbook `VLOOKUP` references. The cause has not been established. The raw values remain available only for audit; the values and valuation-derived ratios are excluded from charts, summary tables, and interpretive claims.
 3. **Princeton 2022 zero.** The source row reports numeric zero for every net-debt component while adjacent years exceed $90 million, and the property valuation says `"No data"`. The zero remains in the processed panel but is excluded from the chart pending clarification.
 4. **Per-capita mismatches.** Several distributed per-capita net-debt values differ by more than 5% from reported debt divided by the population in the same row. Both fields remain in the audit download; per-capita debt is excluded from v0.1 charts, summary tables, and interpretive claims.
 5. **Broad source flags.** A `Significant Data Missing` flag can describe an unobserved blank section elsewhere in the row. v0.1 takes the conservative publication rule of excluding any flagged row from the chart and latest-valid table.
@@ -119,9 +123,10 @@ These issues are evidence about the source record, not evidence of municipal fai
 
 ## Known limitations
 
+- Reported net debt is a statutory, source-defined measure. It is not a complete measure of a local unit's total debt-like obligations, fiscal condition, or credit quality. Obligations not captured by this field may exist; evaluating them would require separately reviewed ACFR disclosures and legal and financial analysis, which v0.1 does not perform.
 - Municipal values are self-reported public budget records and are not independently audited here.
 - The project cannot establish causation, management quality, fiscal health, or creditworthiness.
-- Dollar figures are current dollars and are not adjusted for inflation.
+- Nominal dollars as reported for each budget year; not adjusted for inflation or converted to a common-year dollar basis.
 - A missing or excluded point does not mean zero.
 - Source definitions and workbook construction may change between releases.
 - `openpyxl` reads cached workbook values; it does not execute macros or refresh external links.
@@ -186,4 +191,4 @@ source-data and reuse notice.
 
 ## Disclaimer
 
-> These figures come from self-reported public budget records and have not been independently audited. This project is not a credit rating, investment analysis, or policy recommendation.
+> These figures come from self-reported public budget records and have not been independently audited. Reported net debt is a statutory, source-defined measure, not a complete measure of total debt-like obligations, fiscal condition, or credit quality. This project is not a credit rating, investment analysis, or policy recommendation.

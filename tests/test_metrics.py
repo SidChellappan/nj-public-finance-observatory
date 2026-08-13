@@ -201,6 +201,14 @@ class _LocalAssetParser(HTMLParser):
         super().__init__()
         self.references: list[str] = []
         self.chart_alts: list[str] = []
+        self.text_parts: list[str] = []
+
+    @property
+    def visible_text(self) -> str:
+        return " ".join(" ".join(self.text_parts).split())
+
+    def handle_data(self, data: str) -> None:
+        self.text_parts.append(data)
 
     def handle_starttag(
         self, tag: str, attrs: list[tuple[str, str | None]]
@@ -243,6 +251,48 @@ def test_public_pages_have_working_local_links_and_accessibility_text(
     assert '<title id="chart-title">' in svg
     assert '<desc id="chart-desc">' in svg
     assert 'role="img"' in svg
+
+
+def test_public_review_safeguards_are_visible_and_accessible(
+    project_root: Path,
+) -> None:
+    required_language = (
+        "Nominal dollars as reported for each budget year; not adjusted for "
+        "inflation or converted to a common-year dollar basis.",
+        "Reported net debt is a statutory, source-defined measure.",
+        "The cause has not been established.",
+    )
+    for name in ("index.html", "methods.html"):
+        parser = _LocalAssetParser()
+        parser.feed((project_root / "docs" / name).read_text(encoding="utf-8"))
+        for phrase in required_language:
+            assert phrase in parser.visible_text, f"Missing from visible {name}: {phrase}"
+        assert "current dollars" not in parser.visible_text.casefold()
+
+    svg = (project_root / "docs" / "assets" / "net_debt_trend.svg").read_text(
+        encoding="utf-8"
+    )
+    assert required_language[0] in svg
+    assert "within-municipality" in svg
+    assert "relative debt burden" in svg
+
+
+def test_generated_debt_metadata_uses_reviewed_definitions(
+    project_root: Path,
+) -> None:
+    nominal_sentence = (
+        "Nominal dollars as reported for each budget year; not adjusted for "
+        "inflation or converted to a common-year dollar basis."
+    )
+    latest = pd.read_csv(
+        project_root / "data" / "processed" / "latest_valid_indicators.csv"
+    )
+    assert set(latest["net_debt_unit"]) == {nominal_sentence}
+
+    dictionary = pd.read_csv(project_root / "data" / "data_dictionary.csv")
+    net_debt = dictionary[dictionary["field"] == "net_debt"].iloc[0]
+    assert "Statutory, source-defined" in net_debt["description"]
+    assert nominal_sentence in net_debt["transformation"]
 
 
 def test_clean_source_rebuild_reproduces_every_public_artifact(

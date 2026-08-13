@@ -328,6 +328,19 @@ h3 {
   gap: 18px;
 }
 
+.limit-explainer > p {
+  max-width: 860px;
+  margin: 0;
+}
+
+.limit-explainer > p + p {
+  margin-top: 16px;
+}
+
+.limit-explainer .limit-grid {
+  margin-top: 28px;
+}
+
 .callout {
   min-height: 250px;
   padding: 28px;
@@ -385,6 +398,11 @@ h3 {
   font-size: 14px;
 }
 
+.section-note {
+  max-width: 560px;
+  text-align: right;
+}
+
 .chart-frame {
   margin: 0;
   overflow: hidden;
@@ -411,6 +429,15 @@ h3 {
   padding: 20px 24px 22px;
   border-top: 1px solid var(--line);
   background: #f9f7f0;
+  color: #475569;
+  font-size: 14px;
+}
+
+.chart-guardrail {
+  margin: 16px 0 0;
+  padding: 16px 20px;
+  border-left: 3px solid var(--gold);
+  background: #fff8e8;
   color: #475569;
   font-size: 14px;
 }
@@ -928,6 +955,10 @@ footer {
     flex-direction: column;
   }
 
+  .section-note {
+    text-align: left;
+  }
+
   .chart-frame {
     margin-right: -7px;
     margin-left: -7px;
@@ -950,6 +981,12 @@ footer {
     border: 0;
     overflow: visible;
     background: transparent;
+  }
+
+  .methods-content .table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    background: var(--white);
   }
 
   table:not(.methods-table),

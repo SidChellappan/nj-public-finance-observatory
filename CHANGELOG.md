@@ -2,7 +2,7 @@
 
 All notable project changes will be documented here.
 
-## [Unreleased] - 2026-07-27
+## [Unreleased] - 2026-08-13
 
 ### Added
 
@@ -19,8 +19,19 @@ All notable project changes will be documented here.
 - Formula-mode regression coverage for the five 2024 external valuation lookups.
 - MIT code license, source-data notice, raw-workbook Git policy, and public-release checklist.
 
+### Changed
+
+- Implemented the accepted pre-launch public-finance review revisions without changing the dataset, target municipalities, metrics, source-flag rules, or publication-eligibility logic.
+- Added first-use explanations of the User-Friendly Budget and its two distinct source flags, plus reader-facing definitions of reported net debt and tax collection.
+- Added the statutory, source-defined net-debt boundary and disclosed that evaluating other debt-like obligations would require separately reviewed ACFR disclosures and legal and financial analysis outside v0.1.
+- Replaced vague current-dollar wording with the accepted nominal-dollar explanation in the chart, latest-valid table, methods, data dictionary, and project documentation.
+- Reframed the chart as within-municipality record inspection and added a guardrail against treating line height as relative debt burden, fiscal strength, or a municipal ranking.
+- Elevated the unreconciled 2024 valuation source-scale anomaly, stated that its cause has not been established, and retained the existing audit-only and public-exclusion treatment.
+- Expanded automated language and SVG accessibility assertions for the accepted interpretation safeguards.
+
 ### Fixed
 
+- Restored horizontal scrolling for the Methods field-location table at mobile widths so all source columns remain reachable.
 - Made anomaly-ledger publication statuses field-specific so a missing tax value
   does not imply that a valid net-debt chart point is excluded.
 - Clarified that audit-only evidence remains in the downloadable panel while
