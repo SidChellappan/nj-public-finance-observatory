@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="A reproducible view of selected Mercer County municipal debt and tax indicators using New Jersey's public budget records.">
-  <title>NJ Public Finance Observatory</title>
+  <title>NJ PUBLIC FINANCE OBSERVATORY</title>
   <link rel="stylesheet" href="assets/site.css">
 </head>
-<body>
+<body class="home-page">
   <a class="skip-link" href="#main">Skip to main content</a>
 
   <header class="site-header">
@@ -26,7 +26,7 @@
   <main id="main">
     <section class="hero">
       <div class="hero-copy">
-        <p class="eyebrow">Mercer County · 2015-2025 · Private release candidate</p>
+        <p class="eyebrow">Mercer County: 2015-2025</p>
         <h1>Making municipal finance records easier to inspect.</h1>
         <p class="subtitle">A reproducible view of selected Mercer County municipal debt and tax indicators using New Jersey's public budget records.</p>
         <p class="research-question"><span>Research question</span> How have reported municipal net debt and tax-collection indicators changed across five Mercer County municipalities from 2015-2025, and where does the public record contain gaps or inconsistencies?</p>
@@ -35,17 +35,28 @@
           <a class="button secondary" href="methods.html">Read the methods</a>
         </div>
       </div>
-      <aside class="scope-card" aria-label="Project scope">
-        <p class="scope-label">Deliberately narrow</p>
-        <dl>
-          <div><dt>55</dt><dd>municipality-year rows</dd></div>
-          <div><dt>11</dt><dd>annual source sheets</dd></div>
-          <div><dt>5</dt><dd>Mercer communities</dd></div>
-          <div><dt>1</dt><dd>primary public source</dd></div>
-        </dl>
-        <p>No rankings. No fiscal-health score. No values filled across gaps.</p>
-      </aside>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="dot-matrix"></div>
+        <div class="hero-dashboard">
+          <div class="dashboard-topbar"><span></span><span></span><span></span></div>
+          <div class="hero-chart-preview"></div>
+        </div>
+        <div class="floating-card floating-card-top"><strong>5</strong><span>Mercer communities</span></div>
+        <div class="floating-card floating-card-bottom"><strong>55</strong><span>municipality-year rows</span></div>
+        <div class="floating-status">No rankings. No fiscal-health score.</div>
+      </div>
     </section>
+
+    <aside class="scope-card" aria-label="Project scope">
+      <p class="scope-label">Deliberately narrow</p>
+      <dl>
+        <div><dt>55</dt><dd>municipality-year rows</dd></div>
+        <div><dt>11</dt><dd>annual source sheets</dd></div>
+        <div><dt>5</dt><dd>Mercer communities</dd></div>
+        <div><dt>1</dt><dd>primary public source</dd></div>
+      </dl>
+      <p>No rankings. No fiscal-health score. No values filled across gaps.</p>
+    </aside>
 
     <section class="section two-column" id="limits">
       <div>
@@ -62,7 +73,7 @@
           </article>
           <article class="callout cannot">
             <h3>It cannot show</h3>
-            <p><strong>Reported net debt is a statutory, source-defined measure.</strong> It is not a complete measure of a local unit's total debt-like obligations, fiscal condition, or credit quality. Obligations not captured by this field may exist; evaluating them would require separately reviewed ACFR disclosures and legal and financial analysis, which v0.1 does not perform.</p>
+            <p><strong>Reported net debt is a statutory, source-defined measure.</strong> It is not a complete measure of a local unit's total debt-like obligations, fiscal condition, or credit quality. Obligations not captured by this field may exist; evaluating them would require separately reviewed ACFR disclosures and legal and financial analysis, which this project does not perform.</p>
           </article>
         </div>
       </div>
@@ -208,7 +219,7 @@
         </table>
       </div>
       <p class="table-note"><strong>Dollar basis.</strong> Nominal dollars as reported for each budget year; not adjusted for inflation or converted to a common-year dollar basis.</p>
-      <p class="table-note">“Latest valid” is field-specific. It does not certify the value as independently audited; it means the source value is numeric, the row does not carry either source missing-data flag, and the observation is not excluded by a documented v0.1 rule.</p>
+      <p class="table-note">“Latest valid” is field-specific. It does not certify the value as independently audited; it means the source value is numeric, the row does not carry either source missing-data flag, and the observation is not excluded by a documented publication rule.</p>
     </section>
 
     <section class="section gap-section" id="gaps">
@@ -237,7 +248,7 @@
           <span class="issue-number">03</span>
           <div>
             <h3>Per-capita inconsistencies</h3>
-            <p>Several reported per-capita debt values differ materially from reported debt divided by the population in the same row. Both reported and calculated comparison fields remain in the audit download; per-capita debt is excluded from v0.1 charts, summary tables, and interpretive claims.</p>
+            <p>Several reported per-capita debt values differ materially from reported debt divided by the population in the same row. Both reported and calculated comparison fields remain in the audit download; per-capita debt is excluded from charts, summary tables, and interpretive claims.</p>
           </div>
         </article>
         <article>
@@ -255,7 +266,7 @@
         <p class="section-kicker">Trace the work</p>
         <h2>Methods and source provenance</h2>
         <p>Every row carries the workbook, annual sheet, source row, metric cell, original source representation, unit, and documented transformation. The pinned workbook was retrieved 2026-07-27 and verified with SHA-256 <code>79a59be4c4ab2669…</code>.</p>
-        <p>Total structural imbalances passed a definition and basic coverage review (50 of 55 rows numeric), so the field is included for audit. It is not interpreted or displayed as an outcome in v0.1.</p>
+        <p>Total structural imbalances passed a definition and basic coverage review (50 of 55 rows numeric), so the field is included for audit. It is not interpreted or displayed as an outcome.</p>
         <a class="text-link" href="methods.html">See extraction rules, validation gates, and field locations <span aria-hidden="true">→</span></a>
       </div>
       <aside class="source-card">
@@ -343,14 +354,9 @@
       <p>These figures come from self-reported public budget records and have not been independently audited. This project is not a credit rating, investment analysis, or policy recommendation.</p>
     </section>
 
-    <section class="ai-note">
-      <h2>AI-use disclosure</h2>
-      <p>AI assisted with code drafting, test coverage, documentation, and page structure. A human remains responsible for checking source definitions, anomalies, code behavior, and every published claim. <a href="methods.html#ai">Read the full disclosure</a>.</p>
-    </section>
   </main>
 
   <footer>
-    <p>NJ Public Finance Observatory v0.1 · Methods first, uncertainty visible.</p>
     <div><a href="methods.html">Methods</a><a href="#downloads">Downloads</a><a href="#corrections">Corrections</a></div>
   </footer>
 </body>
