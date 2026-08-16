@@ -594,33 +594,13 @@ h3 {
 
 .callout.cannot {
   margin-top: 42px;
-  border-color: #f0d98a;
-  background: var(--marigold-soft);
-  color: #7c5b07;
+  border-color: #fda4af;
+  background: #fff1f2;
+  color: #881337;
 }
 
-.callout h3::before {
-  display: inline-grid;
-  width: 29px;
-  height: 29px;
-  margin-right: 9px;
-  place-items: center;
-  border-radius: 9px;
-  color: #ffffff;
-  font-family: ui-sans-serif, system-ui, sans-serif;
-  font-size: 14px;
-  vertical-align: 3px;
-}
-
-.callout.can h3::before {
-  content: "✓";
-  background: var(--emerald);
-}
-
-.callout.cannot h3::before {
-  content: "×";
-  background: var(--marigold);
-  color: var(--forest-ink);
+.callout.cannot h3 {
+  color: #9f1239;
 }
 
 .section-heading {
