@@ -160,14 +160,6 @@ GitHub issues and attachments are public, so do not submit confidential, private
 
 An accepted correction should update the anomaly ledger or extraction rule, add a regression test when useful, rebuild every artifact, preserve the prior result in version history, and receive a plain-language changelog entry. Opening an issue does not automatically replace a source-reported value.
 
-## Human ownership and release standards
-
-The automated build establishes reproducibility, but it cannot establish that the owner understands and can defend the work. The v0.1.0 release process therefore combined technical checks with methods review, municipal-budget review, nontechnical comprehension testing, anomaly review, and explicit owner authorization. Future releases should preserve those human gates alongside the automated suite.
-
-See `AI_USE.md` for the AI-use disclosure.
-
-The operational release sequence is recorded in `RELEASE_CHECKLIST.md`.
-
 ## Licensing and source rights
 
 The original project code, templates, and documentation are available under
