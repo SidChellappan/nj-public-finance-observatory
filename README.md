@@ -6,10 +6,6 @@ A methods-first civic research project that asks:
 
 The five municipalities are Hamilton (`1103`), Lawrence (`1107`), Trenton (`1111`), West Windsor (`1113`), and Princeton (`1114`). Municipality codes are the stable keys. The pipeline never joins records using names alone.
 
-## Status
-
-Version `v0.1.0` is the first public release. It was authorized by the project owner on August 16, 2026 after the reproducible build, automated checks, methods review, and plain-language review were completed. Release verification is recorded in `RELEASE_CHECKLIST.md`.
-
 The project is deliberately narrow:
 
 - 5 municipalities
