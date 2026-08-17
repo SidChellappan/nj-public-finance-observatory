@@ -8,7 +8,7 @@ The five municipalities are Hamilton (`1103`), Lawrence (`1107`), Trenton (`1111
 
 ## Status
 
-This repository is a **private v0.1 release candidate**, not an authorized public release. The reproducible build and automated checks pass when the pinned source is present, but human review and ownership gates remain. Do not publish, deploy, push, or create a `v0.1.0` tag until those gates are explicitly approved.
+Version `v0.1.0` is the first public release. It was authorized by the project owner on August 16, 2026 after the reproducible build, automated checks, methods review, and plain-language review were completed. Release verification is recorded in `RELEASE_CHECKLIST.md`.
 
 The project is deliberately narrow:
 
@@ -162,21 +162,13 @@ A reproducible correction should use the [structured GitHub data-correction form
 6. proposed correction; and
 7. a public source link, precise citation, or public attachment supporting the change.
 
-GitHub issues and attachments are public, so do not submit confidential, private, or personally identifying information. The form will become active when the planned repository is publicly authorized; until then, preserve the same evidence for private review by the project owner. See `CONTRIBUTING.md` for the review workflow.
+GitHub issues and attachments are public, so do not submit confidential, private, or personally identifying information. See `CONTRIBUTING.md` for the review workflow.
 
 An accepted correction should update the anomaly ledger or extraction rule, add a regression test when useful, rebuild every artifact, preserve the prior result in version history, and receive a plain-language changelog entry. Opening an issue does not automatically replace a source-reported value.
 
-## Human ownership and launch gates
+## Human ownership and release standards
 
-The automated build can establish reproducibility, but it cannot establish that the owner understands and can defend the work. Before public launch, a human should:
-
-- review the methods with a mentor or technically capable reader;
-- ask someone familiar with municipal budgets to check metric definitions;
-- have a nontechnical reader test the page and uncertainty language;
-- explain the pipeline in ten minutes without relying on AI;
-- reconstruct one extraction component from a blank file;
-- inspect the confirmed anomalies and decide whether each treatment is defensible; and
-- explicitly authorize publishing, deployment, and the `v0.1.0` tag.
+The automated build establishes reproducibility, but it cannot establish that the owner understands and can defend the work. The v0.1.0 release process therefore combined technical checks with methods review, municipal-budget review, nontechnical comprehension testing, anomaly review, and explicit owner authorization. Future releases should preserve those human gates alongside the automated suite.
 
 See `AI_USE.md` for the AI-use disclosure.
 

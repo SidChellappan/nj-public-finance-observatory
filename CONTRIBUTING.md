@@ -1,6 +1,6 @@
 # Contributing corrections
 
-The NJ Public Finance Observatory accepts specific, reproducible corrections to values, missingness, provenance, and explanatory text. Use the [structured data-correction form](https://github.com/SidChellappan/nj-public-finance-observatory/issues/new?template=data-correction.yml) once the repository is publicly authorized.
+The NJ Public Finance Observatory accepts specific, reproducible corrections to values, missingness, provenance, and explanatory text. Use the [structured data-correction form](https://github.com/SidChellappan/nj-public-finance-observatory/issues/new?template=data-correction.yml).
 
 Please submit one municipality-year-field correction per issue when practical and include:
 

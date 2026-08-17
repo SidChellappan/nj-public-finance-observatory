@@ -2,7 +2,7 @@
 
 All notable project changes will be documented here.
 
-## [Unreleased] - 2026-08-13
+## [0.1.0] - 2026-08-16
 
 ### Added
 
@@ -46,4 +46,5 @@ All notable project changes will be documented here.
 
 ### Release status
 
-- Private release candidate only. No push, deployment, publication, release, or `v0.1.0` tag has been authorized.
+- Authorized by the project owner for public release as `v0.1.0` on August 16, 2026.
+- Published from `main/docs` with the reproducible source, audit downloads, methods page, correction workflow, and documented limitations intact.
