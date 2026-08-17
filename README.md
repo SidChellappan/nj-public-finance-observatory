@@ -72,8 +72,6 @@ The downloaded workbook is preserved locally in `data/raw/` but intentionally ex
 
 ## Source sheets and discovered fields
 
-Every annual sheet uses header row 5. The target rows are found from the municipality code, not hard-coded row numbers.
-
 | Field | 2015-2024 | 2025 | Treatment |
 |---|---:|---:|---|
 | Municipality code | A | A | Four-digit stable key |
