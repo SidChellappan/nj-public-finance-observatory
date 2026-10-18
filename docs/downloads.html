@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Download the Mercer County audit panel, data dictionary, anomaly ledger, and reproducible source code.">
+  <title>Downloads | NJ Public Finance Observatory</title>
+  <link rel="stylesheet" href="assets/site.css">
+  <script src="assets/site.js" defer></script>
+</head>
+<body class="case-page">
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="wordmark" href="index.html" aria-label="NJ Public Finance Observatory home">
+      <span class="wordmark-mark" aria-hidden="true">NJ</span>
+      <span>Public Finance Observatory</span>
+    </a>
+    <nav aria-label="Primary navigation">
+      <a class="home-link" href="index.html">Home</a>
+      <details class="case-study-menu">
+        <summary>Example Case Study <span class="menu-chevron" aria-hidden="true">⌄</span></summary>
+        <div class="case-study-dropdown">
+          <a href="case-study.html">Overview &amp; research question</a>
+          <a href="observations.html">Observations</a>
+          <a href="limits.html">Limitations</a>
+          <a href="gaps.html">Gaps &amp; anomalies</a>
+          <a href="methods.html">Methodology</a>
+          <a href="downloads.html" aria-current="page">Downloads</a>
+          <a href="corrections.html">Corrections</a>
+        </div>
+      </details>
+    </nav>
+  </header>
+
+  <main id="main">
+    <header class="methods-hero">
+      <p class="breadcrumb"><a href="case-study.html">← Example case study</a></p>
+      <h1>Downloads.</h1>
+      <p>Download the full public evidence and the code used to build the case study.</p>
+    </header>
+    <section class="section" id="downloads">
+      <div class="download-grid">
+        <a class="download-card" href="downloads/mercer_fiscal_panel.csv" download>
+          <span class="file-type">CSV</span>
+          <strong>Complete audit panel</strong>
+          <span>55 rows, including flagged and display-ineligible evidence</span>
+        </a>
+        <a class="download-card" href="downloads/data_dictionary.csv" download>
+          <span class="file-type">CSV</span>
+          <strong>Data dictionary</strong>
+          <span>Definitions, units, transformations, missingness</span>
+        </a>
+        <a class="download-card" href="downloads/anomaly_ledger.csv" download>
+          <span class="file-type">CSV</span>
+          <strong>Anomaly ledger</strong>
+          <span>Issue, treatment, status, note, source cell</span>
+        </a>
+        <a class="download-card" href="downloads/njpfo-source.zip" download>
+          <span class="file-type">ZIP</span>
+          <strong>Rebuild code</strong>
+          <span>Python package, tests, templates, and documentation</span>
+        </a>
+      </div>
+      <p class="download-note">The audit panel intentionally preserves fields and observations that are excluded from the chart or latest-valid table. Publication-status language describes display and interpretation eligibility, not whether evidence is retained in the downloadable CSV.</p>
+    </section>
+    <section class="disclaimer" aria-label="Important disclaimer">
+      <strong>Important context</strong>
+      <p>These figures come from self-reported public budget records and have not been independently audited. This project is not a credit rating, investment analysis, or policy recommendation.</p>
+    </section>
+  </main>
+  <footer>
+    <p><a href="index.html">NJ Public Finance Observatory</a></p>
+    <div><a href="case-study.html">Example case study</a><a href="downloads.html">Downloads</a><a href="corrections.html">Corrections</a></div>
+  </footer>
+
+</body>
+</html>

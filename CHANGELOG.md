@@ -2,6 +2,18 @@
 
 All notable project changes will be documented here.
 
+## [Unreleased] - 2026-10-17
+
+### Changed
+
+- Made the homepage an Observatory landing page, preserving the existing visual style.
+- Moved the Mercer County study into an example case study with separate overview,
+  observations, limitations, gaps, methodology, downloads, and corrections pages.
+- Added a shared, keyboard-accessible Example Case Study dropdown on desktop and mobile.
+- Removed small section labels such as “Read this first” and replaced study section
+  jumps with page links. Old shared section URLs redirect to their new pages.
+- Extended reproducible builds and navigation checks to every public page.
+
 ## [0.1.0] - 2026-08-16
 
 ### Added

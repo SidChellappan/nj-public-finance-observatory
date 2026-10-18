@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Documented missing records, source flags, and unreconciled anomalies in the Mercer County case study.">
+  <title>Gaps &amp; Anomalies | NJ Public Finance Observatory</title>
+  <link rel="stylesheet" href="assets/site.css">
+  <script src="assets/site.js" defer></script>
+</head>
+<body class="case-page">
+  <a class="skip-link" href="#main">Skip to main content</a>
+  {{SITE_HEADER}}
+  <main id="main">
+    <header class="methods-hero">
+      <p class="breadcrumb"><a href="case-study.html">← Example case study</a></p>
+      <h1>Gaps &amp; anomalies.</h1>
+      <p>Missing data and unresolved inconsistencies are part of the record. They are preserved and documented rather than filled in.</p>
+    </header>
+    <section class="section gap-section" id="gaps">
+      <div>
+        <p>The processed panel preserves all 55 municipality-year rows. Textual “No data” becomes null, never zero. The anomaly ledger currently contains <strong>{{ANOMALY_COUNT}} documented field-level entries</strong>.</p>
+        <a class="button secondary" href="downloads/anomaly_ledger.csv" download>Download anomaly ledger</a>
+      </div>
+      <div class="gap-list">
+        <article>
+          <span class="issue-number">01</span>
+          <div>
+            <h3>Reported debt gaps</h3>
+            <p>{{DEBT_GAP_SUMMARY}}</p>
+          </div>
+        </article>
+        <article>
+          <span class="issue-number">02</span>
+          <div>
+            <h3>Unreconciled 2024 valuation source-scale anomaly</h3>
+            <p>All five 2024 three-year property-valuation values are sharply below adjacent years and rely on cached external-workbook lookups. The cause has not been established. The raw values remain available only for audit; the values and valuation-derived ratios are excluded from charts, summary tables, and interpretive claims.</p>
+          </div>
+        </article>
+        <article>
+          <span class="issue-number">03</span>
+          <div>
+            <h3>Per-capita inconsistencies</h3>
+            <p>Several reported per-capita debt values differ materially from reported debt divided by the population in the same row. Both reported and calculated comparison fields remain in the audit download; per-capita debt is excluded from charts, summary tables, and interpretive claims.</p>
+          </div>
+        </article>
+        <article>
+          <span class="issue-number">04</span>
+          <div>
+            <h3>Source quality flags</h3>
+            <p>{{SOURCE_FLAG_COUNT}} rows carry “No UFB Available,” meaning NJ DCA indicates no UFB is on file, or “Significant Data Missing,” meaning a submitted UFB left at least one entire section blank. {{MISSING_DEBT_COUNT}} rows report no numeric net debt. Flagged rows stay in the panel but cannot supply chart or latest-valid values.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+    <section class="disclaimer" aria-label="Important disclaimer">
+      <strong>Important context</strong>
+      <p>These figures come from self-reported public budget records and have not been independently audited. This project is not a credit rating, investment analysis, or policy recommendation.</p>
+    </section>
+  </main>
+  {{SITE_FOOTER}}
+</body>
+</html>

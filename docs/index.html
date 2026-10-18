@@ -3,36 +3,43 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A reproducible view of selected Mercer County municipal debt and tax indicators using New Jersey's public budget records.">
-  <title>NJ PUBLIC FINANCE OBSERVATORY</title>
+  <meta name="description" content="Explore source-traceable New Jersey municipal finance research and an example Mercer County case study.">
+  <title>NJ Public Finance Observatory</title>
   <link rel="stylesheet" href="assets/site.css">
+  <script src="assets/site.js" defer></script>
 </head>
 <body class="home-page">
   <a class="skip-link" href="#main">Skip to main content</a>
-
   <header class="site-header">
     <a class="wordmark" href="index.html" aria-label="NJ Public Finance Observatory home">
       <span class="wordmark-mark" aria-hidden="true">NJ</span>
       <span>Public Finance Observatory</span>
     </a>
     <nav aria-label="Primary navigation">
-      <a href="#observations">Observations</a>
-      <a href="#limits">Limits</a>
-      <a href="#gaps">Gaps</a>
-      <a href="methods.html">Methods</a>
+      <a class="home-link" href="index.html" aria-current="page">Home</a>
+      <details class="case-study-menu">
+        <summary>Example Case Study <span class="menu-chevron" aria-hidden="true">⌄</span></summary>
+        <div class="case-study-dropdown">
+          <a href="case-study.html">Overview &amp; research question</a>
+          <a href="observations.html">Observations</a>
+          <a href="limits.html">Limitations</a>
+          <a href="gaps.html">Gaps &amp; anomalies</a>
+          <a href="methods.html">Methodology</a>
+          <a href="downloads.html">Downloads</a>
+          <a href="corrections.html">Corrections</a>
+        </div>
+      </details>
     </nav>
   </header>
 
   <main id="main">
-    <section class="hero">
+    <section class="hero landing-hero">
       <div class="hero-copy">
-        <p class="eyebrow">Mercer County: 2015-2025</p>
         <h1>Making municipal finance records easier to inspect.</h1>
-        <p class="subtitle">A reproducible view of selected Mercer County municipal debt and tax indicators using New Jersey's public budget records.</p>
-        <p class="research-question"><span>Research question</span> How have reported municipal net debt and tax-collection indicators changed across five Mercer County municipalities from 2015-2025, and where does the public record contain gaps or inconsistencies?</p>
+        <p class="subtitle">An independent civic research project making New Jersey's municipal finance records easier to explore, understand, and trace to their public sources.</p>
         <div class="hero-actions">
-          <a class="button primary" href="#observations">Explore the records</a>
-          <a class="button secondary" href="methods.html">Read the methods</a>
+          <a class="button primary" href="case-study.html">Explore the example case study <span aria-hidden="true">→</span></a>
+          <a class="button secondary" href="methods.html">Our methodology</a>
         </div>
       </div>
       <div class="hero-visual" aria-hidden="true">
@@ -47,292 +54,44 @@
       </div>
     </section>
 
-    <aside class="scope-card" aria-label="Project scope">
-      <p class="scope-label">Deliberately narrow</p>
-      <dl>
-        <div><dt>55</dt><dd>municipality-year rows</dd></div>
-        <div><dt>11</dt><dd>annual source sheets</dd></div>
-        <div><dt>5</dt><dd>Mercer communities</dd></div>
-        <div><dt>1</dt><dd>primary public source</dd></div>
-      </dl>
-      <p>No rankings. No fiscal-health score. No values filled across gaps.</p>
-    </aside>
-
-    <section class="section two-column" id="limits">
+    <section class="section two-column">
+      <div><h2>Public records, made easier to follow.</h2></div>
       <div>
-        <p class="section-kicker">Read this first</p>
-        <h2>What the data can and cannot show</h2>
-      </div>
-      <div class="limit-explainer">
-        <p>The User-Friendly Budget (UFB) is New Jersey's municipal budget reporting form and database distributed by the Department of Community Affairs. Availability and completeness vary by municipality and budget year. “No UFB Available” means NJ DCA indicates that no UFB is on file; “Significant Data Missing” means a submitted UFB left at least one entire section blank.</p>
-        <p><strong>Reported net debt</strong> is the NJ DCA source measure of gross debt less the deductions recognized in that source for the budget year. <strong>Tax collection</strong> is the reported percentage of the prior calendar year's levy collected; the table therefore shows both the tax reference year and the associated budget year.</p>
-        <div class="limit-grid">
-          <article class="callout can">
-            <h3>It can show</h3>
-            <p>What the state workbook reports for these five municipality codes, how each municipality's reported values move over time, and where the source is missing, flagged, or internally inconsistent.</p>
-          </article>
-          <article class="callout cannot">
-            <h3>It cannot show</h3>
-            <p><strong>Reported net debt is a statutory, source-defined measure.</strong> It is not a complete measure of a local unit's total debt-like obligations, fiscal condition, or credit quality. Obligations not captured by this field may exist; evaluating them would require separately reviewed ACFR disclosures and legal and financial analysis, which this project does not perform.</p>
-          </article>
-        </div>
+        <p>Municipal budget records contain valuable information, but reading them means navigating source files, changing field locations, and missing entries. The Observatory brings selected records into a consistent, inspectable format.</p>
+        <p>Start with a clear question, follow each value back to its source, and keep uncertainty visible. The data, definitions, and rebuild code are available alongside the work.</p>
       </div>
     </section>
 
-    <section class="section chart-section" id="observations">
-      <div class="section-heading">
-        <div>
-          <p class="section-kicker">Principal observation</p>
-          <h2>Reported net debt over time</h2>
-        </div>
-        <p class="section-note">Nominal dollars as reported for each budget year; not adjusted for inflation or converted to a common-year dollar basis.</p>
+    <section class="section featured-study">
+      <div class="featured-study-copy">
+        <h2>An example case study.</h2>
+        <p>Our 2015–2025 study follows reported municipal net debt and tax-collection indicators in Hamilton, Lawrence, Trenton, West Windsor, and Princeton.</p>
+        <p>Explore the research question, observations, methodology, and documented gaps on their own pages.</p>
       </div>
-      <p class="chart-scroll-hint">Swipe the chart sideways to view all years <span aria-hidden="true">→</span></p>
-      <figure class="chart-frame">
-        <img
-          src="assets/net_debt_trend.svg"
-          alt="Line chart of reported net debt in nominal dollars from 2015 through 2025 for Hamilton, Lawrence, Trenton, West Windsor, and Princeton. Read each series within municipality over time; differences in line height are not measures of relative debt burden or fiscal strength. Gaps mark missing, source-flagged, or unreconciled observations, and lines do not bridge those gaps."
-          width="1140"
-          height="640">
-        <figcaption>
-          Reported municipal net debt by budget year. A gap means a record was unavailable, carried an NJ DCA missing-data flag, or remained unreconciled; it does not mean zero debt. Princeton's reported 2022 zero is retained in the download but excluded from this chart pending clarification. Source: NJ DCA 2025 User-Friendly Budget Database, annual Summary sheets.
-        </figcaption>
-      </figure>
-      <p class="chart-guardrail"><strong>Interpretation guardrail.</strong> Read each series as a within-municipality record over time. Differences in line height between municipalities are not measures of relative debt burden, fiscal strength, or a better or worse fiscal position.</p>
-    </section>
-
-    <section class="section" aria-labelledby="latest-title">
-      <div class="section-heading">
-        <div>
-          <p class="section-kicker">Supporting table</p>
-          <h2 id="latest-title">Latest valid reported indicators</h2>
-        </div>
-        <a class="text-link" href="downloads/mercer_fiscal_panel.csv" download>Download the full panel <span aria-hidden="true">↓</span></a>
-      </div>
-      <div class="table-wrap" tabindex="0" aria-label="Scrollable latest valid indicators table">
-        <table>
-          <caption>Most recent unflagged, non-missing observation for each measure. Debt year and tax reference year are shown separately.</caption>
-          <thead>
-            <tr>
-              <th scope="col">Municipality</th>
-              <th scope="col">Reported net debt</th>
-              <th scope="col">Taxes collected</th>
-              <th scope="col">Source cells</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">
-                <span class="town-name">Hamilton</span>
-                <span class="town-code">Code 1103</span>
-              </th>
-              <td data-label="Reported net debt">
-                <span class="metric-value">$149.6M</span>
-                <span class="metric-meta">Budget year 2025; nominal dollars as reported</span>
-              </td>
-              <td data-label="Taxes collected">
-                <span class="metric-value">99.99%</span>
-                <span class="metric-meta">CY 2024, reported in budget year 2025</span>
-              </td>
-              <td data-label="Source cells">
-                <span class="source-cell">2025 Summary LT291</span>
-                <span class="source-cell">2025 Summary P291</span>
-              </td>
-            </tr>
-
-            <tr>
-              <th scope="row">
-                <span class="town-name">Lawrence</span>
-                <span class="town-code">Code 1107</span>
-              </th>
-              <td data-label="Reported net debt">
-                <span class="metric-value">$8.0M</span>
-                <span class="metric-meta">Budget year 2025; nominal dollars as reported</span>
-              </td>
-              <td data-label="Taxes collected">
-                <span class="metric-value">99.49%</span>
-                <span class="metric-meta">CY 2024, reported in budget year 2025</span>
-              </td>
-              <td data-label="Source cells">
-                <span class="source-cell">2025 Summary LT295</span>
-                <span class="source-cell">2025 Summary P295</span>
-              </td>
-            </tr>
-
-            <tr>
-              <th scope="row">
-                <span class="town-name">Trenton</span>
-                <span class="town-code">Code 1111</span>
-              </th>
-              <td data-label="Reported net debt">
-                <span class="metric-value">$85.3M</span>
-                <span class="metric-meta">Budget year 2024; nominal dollars as reported</span>
-              </td>
-              <td data-label="Taxes collected">
-                <span class="metric-value">98.28%</span>
-                <span class="metric-meta">CY 2023, reported in budget year 2024</span>
-              </td>
-              <td data-label="Source cells">
-                <span class="source-cell">2024 Summary LU297</span>
-                <span class="source-cell">2024 Summary P297</span>
-              </td>
-            </tr>
-
-            <tr>
-              <th scope="row">
-                <span class="town-name">West Windsor</span>
-                <span class="town-code">Code 1113</span>
-              </th>
-              <td data-label="Reported net debt">
-                <span class="metric-value">$66.6M</span>
-                <span class="metric-meta">Budget year 2025; nominal dollars as reported</span>
-              </td>
-              <td data-label="Taxes collected">
-                <span class="metric-value">99.49%</span>
-                <span class="metric-meta">CY 2024, reported in budget year 2025</span>
-              </td>
-              <td data-label="Source cells">
-                <span class="source-cell">2025 Summary LT299</span>
-                <span class="source-cell">2025 Summary P299</span>
-              </td>
-            </tr>
-
-            <tr>
-              <th scope="row">
-                <span class="town-name">Princeton</span>
-                <span class="town-code">Code 1114</span>
-              </th>
-              <td data-label="Reported net debt">
-                <span class="metric-value">$205.0M</span>
-                <span class="metric-meta">Budget year 2025; nominal dollars as reported</span>
-              </td>
-              <td data-label="Taxes collected">
-                <span class="metric-value">99.13%</span>
-                <span class="metric-meta">CY 2024, reported in budget year 2025</span>
-              </td>
-              <td data-label="Source cells">
-                <span class="source-cell">2025 Summary LT300</span>
-                <span class="source-cell">2025 Summary P300</span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="table-note"><strong>Dollar basis.</strong> Nominal dollars as reported for each budget year; not adjusted for inflation or converted to a common-year dollar basis.</p>
-      <p class="table-note">“Latest valid” is field-specific. It does not certify the value as independently audited; it means the source value is numeric, the row does not carry either source missing-data flag, and the observation is not excluded by a documented publication rule.</p>
-    </section>
-
-    <section class="section gap-section" id="gaps">
-      <div>
-        <p class="section-kicker">Uncertainty is part of the record</p>
-        <h2>Gaps and anomalies stay visible</h2>
-        <p>The processed panel preserves all 55 municipality-year rows. Textual “No data” becomes null, never zero. The anomaly ledger currently contains <strong>72 documented field-level entries</strong>.</p>
-        <a class="button secondary" href="downloads/anomaly_ledger.csv" download>Download anomaly ledger</a>
-      </div>
-      <div class="gap-list">
-        <article>
-          <span class="issue-number">01</span>
-          <div>
-            <h3>Reported debt gaps</h3>
-            <p>Hamilton: 2015, 2016, 2018, 2019; Lawrence: 2018, 2019; Trenton: 2015, 2019, 2020, 2021, 2022, 2025; West Windsor: 2020, 2021; Princeton: 2016, 2017, 2020, 2022.</p>
-          </div>
-        </article>
-        <article>
-          <span class="issue-number">02</span>
-          <div>
-            <h3>Unreconciled 2024 valuation source-scale anomaly</h3>
-            <p>All five 2024 three-year property-valuation values are sharply below adjacent years and rely on cached external-workbook lookups. The cause has not been established. The raw values remain available only for audit; the values and valuation-derived ratios are excluded from charts, summary tables, and interpretive claims.</p>
-          </div>
-        </article>
-        <article>
-          <span class="issue-number">03</span>
-          <div>
-            <h3>Per-capita inconsistencies</h3>
-            <p>Several reported per-capita debt values differ materially from reported debt divided by the population in the same row. Both reported and calculated comparison fields remain in the audit download; per-capita debt is excluded from charts, summary tables, and interpretive claims.</p>
-          </div>
-        </article>
-        <article>
-          <span class="issue-number">04</span>
-          <div>
-            <h3>Source quality flags</h3>
-            <p>15 rows carry “No UFB Available,” meaning NJ DCA indicates no UFB is on file, or “Significant Data Missing,” meaning a submitted UFB left at least one entire section blank. 6 rows report no numeric net debt. Flagged rows stay in the panel but cannot supply chart or latest-valid values.</p>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section provenance">
-      <div>
-        <p class="section-kicker">Trace the work</p>
-        <h2>Methods and source provenance</h2>
-        <p>Every row carries the workbook, annual sheet, source row, metric cell, original source representation, unit, and documented transformation. The pinned workbook was retrieved 2026-07-27 and verified with SHA-256 <code>79a59be4c4ab2669…</code>.</p>
-        <p>Total structural imbalances passed a definition and basic coverage review (50 of 55 rows numeric), so the field is included for audit. It is not interpreted or displayed as an outcome.</p>
-        <a class="text-link" href="methods.html">See extraction rules, validation gates, and field locations <span aria-hidden="true">→</span></a>
-      </div>
-      <aside class="source-card">
-        <p class="source-card-label">Primary source</p>
-        <h3>NJ DCA 2025 User-Friendly Budget Database</h3>
-        <p>New Jersey's municipal budget reporting form and database, with availability and completeness that vary by municipality and budget year.</p>
-        <p>UFB Database - FINAL.xlsm</p>
-        <a href="https://www.nj.gov/dca/dlgs/programs/mc_budgets.shtml">Open the state source page</a>
-        <a href="https://www.nj.gov/dca/dlgs/programs/mc_budget_docs/UFB%20Database%20-%20FINAL.xlsm">Open the state workbook</a>
-        <a href="downloads/data_dictionary.csv" download>Download data dictionary</a>
+      <aside class="source-card study-summary">
+        <h3>Mercer County, 2015–2025</h3>
+        <dl><div><dt>5</dt><dd>municipalities</dd></div><div><dt>11</dt><dd>budget years</dd></div><div><dt>55</dt><dd>municipality-year rows</dd></div></dl>
+        <a href="observations.html">View the observations <span aria-hidden="true">→</span></a>
       </aside>
     </section>
 
-    <section class="section" id="downloads">
-      <div class="section-heading">
-        <div>
-          <p class="section-kicker">Inspect or reproduce</p>
-          <h2>Downloads</h2>
-        </div>
-      </div>
-      <div class="download-grid">
-        <a class="download-card" href="downloads/mercer_fiscal_panel.csv" download>
-          <span class="file-type">CSV</span>
-          <strong>Complete audit panel</strong>
-          <span>55 rows, including flagged and display-ineligible evidence</span>
-        </a>
-        <a class="download-card" href="downloads/data_dictionary.csv" download>
-          <span class="file-type">CSV</span>
-          <strong>Data dictionary</strong>
-          <span>Definitions, units, transformations, missingness</span>
-        </a>
-        <a class="download-card" href="downloads/anomaly_ledger.csv" download>
-          <span class="file-type">CSV</span>
-          <strong>Anomaly ledger</strong>
-          <span>Issue, treatment, status, note, source cell</span>
-        </a>
-        <a class="download-card" href="downloads/njpfo-source.zip" download>
-          <span class="file-type">ZIP</span>
-          <strong>Rebuild code</strong>
-          <span>Python package, tests, templates, and documentation</span>
-        </a>
-      </div>
-      <p class="download-note">The audit panel intentionally preserves fields and observations that are excluded from the chart or latest-valid table. Publication-status language describes display and interpretation eligibility, not whether evidence is retained in the downloadable CSV.</p>
-    </section>
-
-    <section class="section corrections" id="corrections">
+    <section class="section two-column">
+      <div><h2>Evidence you can inspect.</h2></div>
       <div>
-        <p class="section-kicker">Corrections and feedback</p>
-        <h2>Specific evidence is welcome.</h2>
-      </div>
-      <div>
-        <p>Use the structured form to identify the municipality code, budget year, field, source sheet and cell, current record, proposed correction, and supporting public evidence. GitHub issues and attachments are public, so do not include confidential or personally identifying information.</p>
-        <a class="text-link" href="https://github.com/SidChellappan/nj-public-finance-observatory/issues/new?template=data-correction.yml">Open the data-correction form <span aria-hidden="true">↗</span></a>
-        <a class="text-link" href="methods.html#corrections">Read the correction protocol <span aria-hidden="true">→</span></a>
+        <p>Each published value carries its source sheet, cell, year, and unit. Missing and flagged records stay visible, and unresolved anomalies remain documented.</p>
+        <p>The Observatory does not rank communities or assign fiscal-health scores. Its purpose is to help readers inspect what the public record reports and understand its limits.</p>
+        <a class="text-link" href="downloads.html">Browse data and source-code downloads <span aria-hidden="true">→</span></a>
       </div>
     </section>
-
     <section class="disclaimer" aria-label="Important disclaimer">
       <strong>Important context</strong>
       <p>These figures come from self-reported public budget records and have not been independently audited. This project is not a credit rating, investment analysis, or policy recommendation.</p>
     </section>
-
   </main>
-
   <footer>
-    <div><a href="methods.html">Methods</a><a href="#downloads">Downloads</a><a href="#corrections">Corrections</a></div>
+    <p><a href="index.html">NJ Public Finance Observatory</a></p>
+    <div><a href="case-study.html">Example case study</a><a href="downloads.html">Downloads</a><a href="corrections.html">Corrections</a></div>
   </footer>
+
 </body>
 </html>

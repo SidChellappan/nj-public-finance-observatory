@@ -34,6 +34,16 @@ from .validate import (
 )
 
 TEMPLATE_DIRECTORY = Path(__file__).with_name("templates")
+PUBLIC_PAGES = {
+    "index.html": "Home",
+    "case-study.html": "Overview & research question",
+    "observations.html": "Observations",
+    "limits.html": "Limitations",
+    "gaps.html": "Gaps & anomalies",
+    "methods.html": "Methodology",
+    "downloads.html": "Downloads",
+    "corrections.html": "Corrections",
+}
 NOMINAL_DOLLAR_SENTENCE = (
     "Nominal dollars as reported for each budget year; not adjusted for "
     "inflation or converted to a common-year dollar basis."
@@ -46,8 +56,8 @@ REPRODUCIBLE_ARTIFACTS = (
     "data/anomaly_ledger.csv",
     "docs/assets/net_debt_trend.svg",
     "docs/assets/site.css",
-    "docs/index.html",
-    "docs/methods.html",
+    "docs/assets/site.js",
+    *(f"docs/{name}" for name in PUBLIC_PAGES),
     "docs/downloads/mercer_fiscal_panel.csv",
     "docs/downloads/data_dictionary.csv",
     "docs/downloads/anomaly_ledger.csv",
@@ -458,24 +468,34 @@ def _render_site(
         "MISSING_DEBT_COUNT": str(missing_debt_count),
         "DEBT_GAP_SUMMARY": html.escape(_debt_gap_summary(panel)),
     }
-    index_replacements = {
+    replacements = {
         **common,
         "LATEST_TABLE_ROWS": _latest_table_html(latest),
+        "SITE_FOOTER": _render_template("footer.html", {}),
     }
-    (docs / "index.html").write_text(
-        _render_template("index.html", index_replacements),
-        encoding="utf-8",
-        newline="\n",
-    )
-    (docs / "methods.html").write_text(
-        _render_template("methods.html", common),
-        encoding="utf-8",
-        newline="\n",
-    )
-    shutil.copyfile(
-        TEMPLATE_DIRECTORY / "site.css",
-        assets / "site.css",
-    )
+    for name in PUBLIC_PAGES:
+        links = []
+        for target, label in PUBLIC_PAGES.items():
+            if target == "index.html":
+                continue
+            current = ' aria-current="page"' if name == target else ""
+            links.append(
+                f'<a href="{target}"{current}>{html.escape(label)}</a>'
+            )
+        header = _render_template(
+            "header.html",
+            {
+                "HOME_CURRENT": ' aria-current="page"' if name == "index.html" else "",
+                "CASE_STUDY_LINKS": "\n          ".join(links),
+            },
+        )
+        (docs / name).write_text(
+            _render_template(name, {**replacements, "SITE_HEADER": header}),
+            encoding="utf-8",
+            newline="\n",
+        )
+    for asset in ("site.css", "site.js"):
+        shutil.copyfile(TEMPLATE_DIRECTORY / asset, assets / asset)
     (docs / ".nojekyll").write_text("", encoding="utf-8", newline="\n")
 
     shutil.copyfile(

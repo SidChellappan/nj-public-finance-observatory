@@ -21,7 +21,7 @@ dev = ["pytest==9.1.1"]
 where = ["src"]
 
 [tool.setuptools.package-data]
-njpfo = ["templates/*.html", "templates/*.css"]
+njpfo = ["templates/*.html", "templates/*.css", "templates/*.js"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

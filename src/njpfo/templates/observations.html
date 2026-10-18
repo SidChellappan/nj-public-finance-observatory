@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Reported net debt and latest valid tax-collection indicators for five Mercer County communities.">
+  <title>Observations | NJ Public Finance Observatory</title>
+  <link rel="stylesheet" href="assets/site.css">
+  <script src="assets/site.js" defer></script>
+</head>
+<body class="case-page">
+  <a class="skip-link" href="#main">Skip to main content</a>
+  {{SITE_HEADER}}
+  <main id="main">
+    <header class="methods-hero">
+      <p class="breadcrumb"><a href="case-study.html">← Example case study</a></p>
+      <h1>Observations.</h1>
+      <p>The chart and supporting table from the Mercer County study, with source years, units, and missing observations kept visible.</p>
+    </header>
+    <section class="section chart-section" id="observations">
+      <div class="section-heading">
+        <div>
+          <h2>Reported net debt over time</h2>
+        </div>
+        <p class="section-note">Nominal dollars as reported for each budget year; not adjusted for inflation or converted to a common-year dollar basis.</p>
+      </div>
+      <p class="chart-scroll-hint">Swipe the chart sideways to view all years <span aria-hidden="true">→</span></p>
+      <figure class="chart-frame">
+        <img
+          src="assets/net_debt_trend.svg"
+          alt="Line chart of reported net debt in nominal dollars from 2015 through 2025 for Hamilton, Lawrence, Trenton, West Windsor, and Princeton. Read each series within municipality over time; differences in line height are not measures of relative debt burden or fiscal strength. Gaps mark missing, source-flagged, or unreconciled observations, and lines do not bridge those gaps."
+          width="1140"
+          height="640">
+        <figcaption>
+          Reported municipal net debt by budget year. A gap means a record was unavailable, carried an NJ DCA missing-data flag, or remained unreconciled; it does not mean zero debt. Princeton's reported 2022 zero is retained in the download but excluded from this chart pending clarification. Source: NJ DCA 2025 User-Friendly Budget Database, annual Summary sheets.
+        </figcaption>
+      </figure>
+      <p class="chart-guardrail">Read each series as a within-municipality record over time. Differences in line height between municipalities are not measures of relative debt burden, fiscal strength, or a better or worse fiscal position.</p>
+    <p class="related-links"><a href="limits.html">Read the limitations →</a> <a href="gaps.html">Explore gaps &amp; anomalies →</a></p></section>
+
+    <section class="section" aria-labelledby="latest-title">
+      <div class="section-heading">
+        <div>
+          <h2 id="latest-title">Latest valid reported indicators</h2>
+        </div>
+        <a class="text-link" href="downloads/mercer_fiscal_panel.csv" download>Download the full panel <span aria-hidden="true">↓</span></a>
+      </div>
+      <div class="table-wrap" tabindex="0" aria-label="Scrollable latest valid indicators table">
+        <table>
+          <caption>Most recent unflagged, non-missing observation for each measure. Debt year and tax reference year are shown separately.</caption>
+          <thead>
+            <tr>
+              <th scope="col">Municipality</th>
+              <th scope="col">Reported net debt</th>
+              <th scope="col">Taxes collected</th>
+              <th scope="col">Source cells</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{LATEST_TABLE_ROWS}}
+          </tbody>
+        </table>
+      </div>
+      <p class="table-note"><strong>Dollar basis.</strong> Nominal dollars as reported for each budget year; not adjusted for inflation or converted to a common-year dollar basis.</p>
+      <p class="table-note">“Latest valid” is field-specific. It does not certify the value as independently audited; it means the source value is numeric, the row does not carry either source missing-data flag, and the observation is not excluded by a documented publication rule.</p>
+    </section>
+    <section class="disclaimer" aria-label="Important disclaimer">
+      <strong>Important context</strong>
+      <p>These figures come from self-reported public budget records and have not been independently audited. This project is not a credit rating, investment analysis, or policy recommendation.</p>
+    </section>
+  </main>
+  {{SITE_FOOTER}}
+</body>
+</html>

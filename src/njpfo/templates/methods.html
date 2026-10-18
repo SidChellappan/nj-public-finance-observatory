@@ -3,56 +3,30 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Methods, source provenance, field mapping, and limitations for the NJ Public Finance Observatory.">
-  <title>METHODS: NJ PUBLIC FINANCE OBSERVATORY</title>
+  <meta name="description" content="Methods, source provenance, field mapping, and validation for the Mercer County case study.">
+  <title>Methodology | NJ Public Finance Observatory</title>
   <link rel="stylesheet" href="assets/site.css">
+  <script src="assets/site.js" defer></script>
 </head>
 <body class="methods-page">
   <a class="skip-link" href="#main">Skip to main content</a>
-  <header class="site-header">
-    <a class="wordmark" href="index.html" aria-label="NJ Public Finance Observatory home">
-      <span class="wordmark-mark" aria-hidden="true">NJ</span>
-      <span>Public Finance Observatory</span>
-    </a>
-    <nav aria-label="Primary navigation">
-      <a href="index.html#observations">Observations</a>
-      <a href="index.html#gaps">Gaps</a>
-      <a href="index.html#downloads">Downloads</a>
-      <a href="methods.html" aria-current="page">Methods</a>
-    </nav>
-  </header>
-
-  <main id="main" class="methods-main">
+  {{SITE_HEADER}}
+  <main id="main">
     <header class="methods-hero">
-      <h1>How the Observatory rebuilds the public record</h1>
-      <p>This page distinguishes source-reported figures from calculations made for quality control. It documents the extraction before making any substantive claim.</p>
+      <p class="breadcrumb"><a href="case-study.html">← Example case study</a></p>
+      <h1>Methodology.</h1>
+      <p>Source-reported figures are kept separate from quality-control calculations. Every transformation and publication rule is documented.</p>
     </header>
-
-    <div class="methods-layout">
-      <aside class="toc" aria-label="On this page">
-        <p>On this page</p>
-        <a href="#scope">Scope</a>
-        <a href="#source">Source</a>
-        <a href="#fields">Field locations</a>
-        <a href="#normalization">Normalization</a>
-        <a href="#validation">Validation</a>
-        <a href="#publication">Publication rules</a>
-        <a href="#limitations">Limitations</a>
-        <a href="#corrections">Corrections</a>
-      </aside>
-
-      <article class="methods-content">
-        <section id="scope">
-          <p class="section-kicker">01: Scope</p>
+    <article class="section methods-content methodology-content"><section id="scope">
           <h2>One question, five stable identifiers, eleven years</h2>
           <p>The unit of observation is one municipality code in one annual NJ DCA Summary sheet. The target codes are Hamilton 1103, Lawrence 1107, Trenton 1111, West Windsor 1113, and Princeton 1114. Records are selected and joined by code; municipality names are never used as join keys.</p>
           <p>The expected cross-product is 5 municipalities × 11 budget years = 55 rows. Rows stay in the panel even when every public metric is missing.</p>
         </section>
 
         <section id="source">
-          <p class="section-kicker">02: Source provenance</p>
-          <h2>A pinned state workbook, not hand-copied values</h2>
+          <h2>Source provenance</h2>
           <p>The User-Friendly Budget (UFB) is New Jersey's municipal budget reporting form and database distributed by the Department of Community Affairs. Availability and completeness vary by municipality and budget year. “No UFB Available” means NJ DCA indicates that no UFB is on file; “Significant Data Missing” means a submitted UFB left at least one entire section blank.</p>
+          <p>Every row carries the workbook, annual sheet, source row, metric cell, original source representation, unit, and documented transformation.</p>
           <dl class="provenance-list">
             <div><dt>Publisher</dt><dd>New Jersey Department of Community Affairs, Division of Local Government Services</dd></div>
             <div><dt>Workbook</dt><dd>{{SOURCE_WORKBOOK_NAME}}</dd></div>
@@ -62,11 +36,12 @@
             <div><dt>SHA-256</dt><dd><code>{{SOURCE_SHA256}}</code></dd></div>
           </dl>
           <p>The build verifies this checksum before extraction. If the state replaces the file at the same URL, the build stops until the changed workbook is reviewed and provenance is deliberately updated.</p>
+          <p>Total structural imbalances passed a definition and basic coverage review ({{STRUCTURAL_COVERAGE}} rows numeric), so the field is included for audit. It is not interpreted or displayed as an outcome.</p>
+          <p><a href="downloads/data_dictionary.csv" download>Download the data dictionary</a> for field definitions, units, and transformations.</p>
           <p>The workbook is opened with <code>openpyxl</code> in read-only, <code>data_only=True</code> mode. That reads values distributed in the workbook without executing macros or recalculating external links. It also means cached source values can carry upstream problems; the unreconciled 2024 valuation source-scale anomaly is one example, and its cause has not been established.</p>
         </section>
 
         <section id="fields">
-          <p class="section-kicker">03: Source sheets and fields</p>
           <h2>Header-driven extraction with one documented layout shift</h2>
           <p>All annual sheets are named <code>2015 Summary</code> through <code>2025 Summary</code>. Header row 5 identifies metrics. Rows are searched for the five target codes, so extraction does not depend on a municipality's row position.</p>
           <div class="table-wrap" tabindex="0" aria-label="Scrollable source field locations table">
@@ -91,7 +66,6 @@
         </section>
 
         <section id="normalization">
-          <p class="section-kicker">04: Normalization and missingness</p>
           <h2>Preserve first; interpret later</h2>
           <ol class="method-steps">
             <li><strong>Select by code.</strong> Read each annual sheet and require exactly one row for every target code.</li>
@@ -104,7 +78,6 @@
         </section>
 
         <section id="validation">
-          <p class="section-kicker">05: Validation</p>
           <h2>What stops a build and what produces a warning</h2>
           <div class="validation-grid">
             <div>
@@ -134,48 +107,17 @@
         </section>
 
         <section id="publication">
-          <p class="section-kicker">06: Publication rules</p>
           <h2>Reported values are not the same as verified facts</h2>
           <p>The chart displays the workbook's reported net debt. Nominal dollars as reported for each budget year; not adjusted for inflation or converted to a common-year dollar basis. Missing, source-flagged, and unreconciled observations become visible gaps; lines are not interpolated across them.</p>
           <p>Read each series as a within-municipality record over time. Differences in line height between municipalities are not measures of relative debt burden, fiscal strength, or a better or worse fiscal position.</p>
           <p>The latest-valid table chooses the newest value separately for net debt and tax collection. A candidate must be numeric, carry neither missing-data flag, and pass the field's publication rule. Each displayed cell includes its budget year, unit, annual source sheet, and Excel cell.</p>
           <p>The 2024 property-valuation cells for all five targets use cached external-workbook <code>VLOOKUP</code> values that are far below 2023 and 2025. The cause has not been established. Those values and the source debt-to-valuation ratios remain in the downloadable audit panel but are excluded from charts, latest-valid tables, and interpretive claims. Reported net debt does not depend on that denominator and remains eligible when its own row passes the rules.</p>
-        </section>
-
-        <section id="limitations">
-          <p class="section-kicker">07: Known limitations</p>
-          <h2>What remains unresolved</h2>
-          <ul>
-            <li>Reported net debt is a statutory, source-defined measure. It is not a complete measure of a local unit's total debt-like obligations, fiscal condition, or credit quality. Obligations not captured by this field may exist; evaluating them would require separately reviewed ACFR disclosures and legal and financial analysis, which this project does not perform.</li>
-            <li>Trenton's 2025 net-debt, per-capita debt, and tax-collection cells say “No data.” Earlier Trenton years also contain unavailable records.</li>
-            <li>Princeton's 2022 source row reports numeric zero for every net-debt component while adjacent years exceed $90 million. Zero is retained, but the chart omits it pending clarification.</li>
-            <li>Several per-capita debt values do not approximately equal the same row's reported debt divided by population. They remain in the audit download but are excluded from charts, summary tables, and interpretive claims.</li>
-            <li>The unreconciled 2024 valuation source-scale anomaly affects all five targets. Its raw values remain available only for audit, and its cause has not been established.</li>
-            <li>The project does not independently audit municipal submissions or establish why a value changed.</li>
-            <li>Nominal dollars as reported for each budget year; not adjusted for inflation or converted to a common-year dollar basis. Definitions or source construction may change over time.</li>
-          </ul>
-          <p>ACS enrichment is excluded because rolling five-year estimates would add overlapping periods and a second set of vintage and uncertainty rules before the base data is stable. EMMA is excluded because issuer matching, disclosure-document extraction, and bond-trading context are separate research problems. Neither source is needed to answer the narrow research question.</p>
-        </section>
-
-        <section id="corrections">
-          <p class="section-kicker">08: Corrections</p>
-          <h2>A correction should be reproducible too</h2>
-          <p>A useful correction identifies the municipality code, budget year, field, annual sheet and cell, current Observatory record, exact proposed correction, and supporting public evidence. The reviewer should be able to repeat the check without relying on a screenshot alone.</p>
-          <p><a href="https://github.com/SidChellappan/nj-public-finance-observatory/issues/new?template=data-correction.yml">Open the structured data-correction form</a>. GitHub issues and attachments are public, so do not include confidential, private, or personally identifying information.</p>
-          <p>Accepted changes will preserve the prior artifact in version history, update the anomaly ledger or extraction rule, add a regression test when appropriate, rebuild all public artifacts, and receive a plain-language changelog entry. Opening an issue does not automatically replace a source-reported value.</p>
-        </section>
-
-        <section class="disclaimer" aria-label="Important disclaimer">
-          <strong>Important context</strong>
-          <p>These figures come from self-reported public budget records and have not been independently audited. This project is not a credit rating, investment analysis, or policy recommendation.</p>
-        </section>
-      </article>
-    </div>
+        </section></article><section class="section related-links"><a href="limits.html">Read the limitations →</a><a href="corrections.html">Read the correction protocol →</a></section>
+    <section class="disclaimer" aria-label="Important disclaimer">
+      <strong>Important context</strong>
+      <p>These figures come from self-reported public budget records and have not been independently audited. This project is not a credit rating, investment analysis, or policy recommendation.</p>
+    </section>
   </main>
-
-  <footer>
-    <p><a href="index.html">Return to observations</a></p>
-    <div><a href="index.html#downloads">Downloads</a><a href="#corrections">Corrections</a></div>
-  </footer>
+  {{SITE_FOOTER}}
 </body>
 </html>

@@ -141,8 +141,18 @@ EMMA adds issuer matching, disclosure-document extraction, security-level contex
 - `data/data_dictionary.csv` — field definitions, units, transformations, and missingness rules
 - `data/anomaly_ledger.csv` — field-level issues, treatments, publication status, and source cells
 - `docs/assets/net_debt_trend.svg` — accessible reported-net-debt chart
-- `docs/index.html` — responsive static page
-- `docs/methods.html` — methods, provenance, field map, validation, and limitations
+- `docs/index.html` — Observatory landing page
+- `docs/case-study.html` — example case study overview and research question
+- `docs/observations.html` — reported-net-debt chart and latest valid indicators
+- `docs/limits.html` — source definitions and interpretation limits
+- `docs/gaps.html` — missing data, flags, and anomalies
+- `docs/methods.html` — methodology, provenance, field map, and validation
+- `docs/downloads.html` — audit data and reproducible source-code downloads
+- `docs/corrections.html` — correction form and review protocol
+
+The shared **Example Case Study** dropdown opens each part as a separate page on
+desktop and mobile. Previously shared homepage section links redirect to their
+corresponding pages.
 
 ## Submit a correction
 

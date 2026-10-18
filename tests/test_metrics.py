@@ -2,12 +2,12 @@ from __future__ import annotations
 
 from html.parser import HTMLParser
 from pathlib import Path
-from urllib.parse import urlsplit
+from urllib.parse import unquote, urlsplit
 
 import pandas as pd
 import pytest
 
-from njpfo.build import REPRODUCIBLE_ARTIFACTS, build_all
+from njpfo.build import PUBLIC_PAGES, REPRODUCIBLE_ARTIFACTS, build_all
 from njpfo.build import build_latest_valid_table
 from njpfo.normalize import apply_publication_rules
 from njpfo.validate import (
@@ -202,6 +202,7 @@ class _LocalAssetParser(HTMLParser):
         self.references: list[str] = []
         self.chart_alts: list[str] = []
         self.text_parts: list[str] = []
+        self.ids: set[str] = set()
 
     @property
     def visible_text(self) -> str:
@@ -214,6 +215,8 @@ class _LocalAssetParser(HTMLParser):
         self, tag: str, attrs: list[tuple[str, str | None]]
     ) -> None:
         values = dict(attrs)
+        if values.get("id"):
+            self.ids.add(values["id"] or "")
         if tag == "a" and values.get("href"):
             self.references.append(values["href"] or "")
         if tag in {"img", "script", "link"}:
@@ -230,7 +233,7 @@ def test_public_pages_have_working_local_links_and_accessibility_text(
     project_root: Path,
 ) -> None:
     docs = project_root / "docs"
-    for name in ("index.html", "methods.html"):
+    for name in PUBLIC_PAGES:
         path = docs / name
         text = path.read_text(encoding="utf-8")
         assert "{{" not in text
@@ -239,11 +242,15 @@ def test_public_pages_have_working_local_links_and_accessibility_text(
         parser.feed(text)
         for reference in parser.references:
             parsed = urlsplit(reference)
-            if parsed.scheme or parsed.netloc or reference.startswith("#"):
+            if parsed.scheme or parsed.netloc:
                 continue
-            local_path = (path.parent / parsed.path).resolve()
+            local_path = (path.parent / unquote(parsed.path)).resolve() if parsed.path else path
             assert local_path.exists(), f"Broken local reference: {name} -> {reference}"
-        if name == "index.html":
+            if parsed.fragment:
+                target = _LocalAssetParser()
+                target.feed(local_path.read_text(encoding="utf-8"))
+                assert unquote(parsed.fragment) in target.ids, f"Broken fragment: {name} -> {reference}"
+        if name == "observations.html":
             assert parser.chart_alts
             assert all(len(alt) > 80 for alt in parser.chart_alts)
 
@@ -262,10 +269,16 @@ def test_public_review_safeguards_are_visible_and_accessible(
         "Reported net debt is a statutory, source-defined measure.",
         "The cause has not been established.",
     )
-    for name in ("index.html", "methods.html"):
+    required_by_page = {
+        "observations.html": required_language[:1],
+        "limits.html": (required_language[0], required_language[1]),
+        "gaps.html": required_language[2:],
+        "methods.html": required_language[:1] + required_language[2:],
+    }
+    for name, phrases in required_by_page.items():
         parser = _LocalAssetParser()
         parser.feed((project_root / "docs" / name).read_text(encoding="utf-8"))
-        for phrase in required_language:
+        for phrase in phrases:
             assert phrase in parser.visible_text, f"Missing from visible {name}: {phrase}"
         assert "current dollars" not in parser.visible_text.casefold()
 
@@ -275,6 +288,31 @@ def test_public_review_safeguards_are_visible_and_accessible(
     assert required_language[0] in svg
     assert "within-municipality" in svg
     assert "relative debt burden" in svg
+
+
+def test_landing_page_and_case_study_use_separate_pages(project_root: Path) -> None:
+    docs = project_root / "docs"
+    home = (docs / "index.html").read_text(encoding="utf-8")
+    overview = (docs / "case-study.html").read_text(encoding="utf-8")
+    assert '<p class="research-question">' not in home
+    assert '<p class="research-question">' in overview
+    assert 'class="chart-frame"' not in home
+    assert 'class="chart-frame"' in (docs / "observations.html").read_text(encoding="utf-8")
+    for name in PUBLIC_PAGES:
+        text = (docs / name).read_text(encoding="utf-8")
+        assert text.count('<h1>') == 1
+        assert 'class="section-kicker"' not in text
+        assert 'Read this first' not in text
+        assert text.count('aria-current="page"') == 1
+        menu = text.split('<details class="case-study-menu">', 1)[1].split('</details>', 1)[0]
+        assert '<summary>Example Case Study ' in menu
+        for target in PUBLIC_PAGES:
+            if target != "index.html":
+                assert f'href="{target}"' in menu
+        parser = _LocalAssetParser()
+        parser.feed(text)
+        # The skip link is the only in-page navigation; study links open documents.
+        assert [ref for ref in parser.references if ref.startswith('#')] == ['#main']
 
 
 def test_generated_debt_metadata_uses_reviewed_definitions(
