@@ -13,6 +13,7 @@ All notable project changes will be documented here.
 - Removed small section labels such as “Read this first” and replaced study section
   jumps with page links. Old shared section URLs redirect to their new pages.
 - Extended reproducible builds and navigation checks to every public page.
+- Versioned stylesheet and script URLs so returning visitors receive the updated navigation.
 
 ## [0.1.0] - 2026-08-16
 

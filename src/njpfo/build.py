@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import html
 import re
 import shutil
@@ -456,6 +457,10 @@ def _render_site(
     )
     missing_debt_count = int(panel["net_debt"].isna().sum())
     common = {
+        "ASSET_VERSION": hashlib.sha256(
+            (TEMPLATE_DIRECTORY / "site.css").read_bytes()
+            + (TEMPLATE_DIRECTORY / "site.js").read_bytes()
+        ).hexdigest()[:12],
         "SOURCE_SHA256": SOURCE_SHA256,
         "SOURCE_SHA256_SHORT": SOURCE_SHA256[:16],
         "SOURCE_RETRIEVAL_DATE": SOURCE_RETRIEVAL_DATE,
