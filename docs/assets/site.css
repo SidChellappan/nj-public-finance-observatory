@@ -1012,30 +1012,6 @@ tbody tr:last-child td {
   margin-top: 13px;
 }
 
-.disclaimer {
-  display: grid;
-  width: min(calc(100% - 40px), var(--content));
-  margin: 15px auto 0;
-  padding: 25px 28px;
-  grid-template-columns: 180px 1fr;
-  gap: 26px;
-  border: 1px solid #efd890;
-  border-left: 1px solid #efd890;
-  border-radius: 18px;
-  background: var(--marigold-soft);
-  color: #61583f;
-}
-
-.disclaimer strong {
-  color: var(--forest-ink);
-  font-size: 13px;
-  text-transform: uppercase;
-}
-
-.disclaimer p {
-  margin: 0;
-}
-
 footer {
   display: flex;
   width: min(calc(100% - 40px), var(--content));
@@ -1254,11 +1230,6 @@ footer a:hover {
   padding-left: 20px;
 }
 
-.methods-content .disclaimer {
-  width: 100%;
-  margin: 0;
-}
-
 @media (max-width: 1040px) {
   .hero {
     min-height: 0;
@@ -1392,7 +1363,6 @@ footer a:hover {
   .hero,
   .scope-card,
   .section,
-  .disclaimer,
   footer,
   .methods-hero,
   .methods-layout {
@@ -1462,11 +1432,6 @@ footer a:hover {
 
   .chart-frame figcaption {
     min-width: 760px;
-  }
-
-  .disclaimer {
-    grid-template-columns: 1fr;
-    gap: 8px;
   }
 
   .toc {

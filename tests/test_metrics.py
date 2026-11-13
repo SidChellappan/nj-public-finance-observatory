@@ -237,7 +237,7 @@ def test_public_pages_have_working_local_links_and_accessibility_text(
         path = docs / name
         text = path.read_text(encoding="utf-8")
         assert "{{" not in text
-        assert "These figures come from self-reported public budget records" in text
+        assert 'aria-label="Important disclaimer"' not in text
         parser = _LocalAssetParser()
         parser.feed(text)
         for reference in parser.references:
